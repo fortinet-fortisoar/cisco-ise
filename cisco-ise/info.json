@@ -1,0 +1,798 @@
+{
+    "name": "cisco-ise",
+    "version": "2.1.0",
+    "label": "Cisco ISE",
+    "description": "Cisco ISE connector provides actions like, list all active sessions, quarantine IP/Mac address, un-quarantine IP/Mac address etc.",
+    "publisher": "Community",
+    "icon_small_name": "Cisco_ISE_32X32.png",
+    "icon_large_name": "Cisco_ISE_80X80.png",
+    "category": "Network Access Control",
+    "configuration": {
+        "fields": [
+            {
+                "title": "Server URL",
+                "type": "text",
+                "name": "ipaddr",
+                "required": true,
+                "visible": true,
+                "editable": true
+            },
+            {
+                "title": "Username",
+                "type": "text",
+                "name": "username",
+                "required": true,
+                "visible": true,
+                "editable": true
+            },
+            {
+                "title": "Password",
+                "type": "password",
+                "name": "password",
+                "required": true,
+                "visible": true,
+                "editable": true
+            },
+            {
+                "title": "ERS Port",
+                "type": "integer",
+                "name": "port",
+                "required": false,
+                "visible": true,
+                "editable": true,
+                "value": 9060
+            },
+            {
+                "title": "Verify SSL",
+                "type": "checkbox",
+                "name": "verify",
+                "required": true,
+                "visible": true,
+                "editable": true,
+                "value": true
+            }
+        ]
+    },
+    "operations": [
+        {
+            "operation": "list_active_sessions",
+            "category": "investigation",
+            "annotation": "list_active_sessions",
+            "title": "List All Active Sessions",
+            "description": "Retrieves a list of all active sessions from Cisco ISE.",
+            "enabled": true,
+            "parameters": [],
+            "output_schema": {
+                "request_status": "",
+                "result": {}
+            }
+        },
+        {
+            "operation": "get_internal_user_details",
+            "category": "investigation",
+            "annotation": "get_internal_user_details",
+            "output_schema": "",
+            "title": "Get Internal User Details",
+            "description": "Get Internal User Details",
+            "enabled": true,
+            "parameters": [
+                {
+                    "title": "User ID",
+                    "type": "text",
+                    "name": "userid",
+                    "required": true,
+                    "visible": true,
+                    "editable": true,
+                    "tooltip": "User ID can be found via List Internal Users action"
+                }
+            ]
+        },
+        {
+            "operation": "list_internal_users",
+            "title": "List Internal Users",
+            "description": "Get all the internal users.",
+            "annotation": "list_internal_users",
+            "category": "investigation",
+            "enabled": true,
+            "parameters": [
+                {
+                    "title": "User Name",
+                    "type": "text",
+                    "name": "filter.name",
+                    "required": false,
+                    "visible": true,
+                    "editable": true
+                },
+                {
+                    "title": "First Name",
+                    "type": "text",
+                    "name": "filter.firstName",
+                    "required": false,
+                    "visible": true,
+                    "editable": true
+                },
+                {
+                    "title": "Last Name",
+                    "type": "text",
+                    "name": "filter.lastName",
+                    "required": false,
+                    "visible": true,
+                    "editable": true
+                },
+                {
+                    "title": "Email Address",
+                    "type": "text",
+                    "name": "filter.email",
+                    "required": false,
+                    "visible": true,
+                    "editable": true
+                },
+                {
+                    "title": "Size",
+                    "type": "integer",
+                    "name": "size",
+                    "required": false,
+                    "visible": true,
+                    "editable": true
+                },
+                {
+                    "title": "Page",
+                    "type": "integer",
+                    "name": "page",
+                    "required": false,
+                    "visible": true,
+                    "editable": true
+                }
+            ],
+            "output_schema": ""
+        },
+        {
+            "operation": "disable_internal_user",
+            "category": "containment",
+            "annotation": "disable_internal_user",
+            "output_schema": "",
+            "title": "Disable Internal User",
+            "description": "Sets Internal User Status to: Disabled",
+            "enabled": true,
+            "parameters": [
+                {
+                    "title": "Username",
+                    "type": "text",
+                    "name": "filter.name",
+                    "required": true,
+                    "visible": true,
+                    "editable": true
+                }
+            ]
+        },
+        {
+            "operation": "enable_internal_user",
+            "category": "containment",
+            "annotation": "enable_internal_user",
+            "output_schema": "",
+            "title": "Enable Internal User",
+            "description": "Sets Internal User Status to: Enabled",
+            "enabled": true,
+            "parameters": [
+                {
+                    "title": "Username",
+                    "type": "text",
+                    "name": "filter.name",
+                    "required": true,
+                    "visible": true,
+                    "editable": true
+                }
+            ]
+        },
+        {
+            "operation": "list_guest_users",
+            "title": "List Guest Users",
+            "description": "Get all the Guest Users.",
+            "annotation": "list_guest_users",
+            "category": "investigation",
+            "enabled": true,
+            "parameters": [
+                {
+                    "title": "User Name",
+                    "type": "text",
+                    "name": "filter.name",
+                    "required": false,
+                    "visible": true,
+                    "editable": true
+                },
+                {
+                    "title": "First Name",
+                    "type": "text",
+                    "name": "filter.firstName",
+                    "required": false,
+                    "visible": true,
+                    "editable": true
+                },
+                {
+                    "title": "Last Name",
+                    "type": "text",
+                    "name": "filter.lastName",
+                    "required": false,
+                    "visible": true,
+                    "editable": true
+                },
+                {
+                    "title": "Email Address",
+                    "type": "text",
+                    "name": "filter.emailAddress",
+                    "required": false,
+                    "visible": true,
+                    "editable": true
+                },
+                {
+                    "title": "Sponsor Username",
+                    "type": "text",
+                    "name": "filter.sponsorUserName",
+                    "required": false,
+                    "visible": true,
+                    "editable": true,
+                    "tooltip": "Username for the sponsor of the guest account"
+                },
+                {
+                    "title": "Company",
+                    "type": "text",
+                    "name": "filter.company",
+                    "required": false,
+                    "visible": true,
+                    "editable": true
+                },
+                {
+                    "title": "Phone Number",
+                    "type": "text",
+                    "name": "filter.phoneNumber",
+                    "required": false,
+                    "visible": true,
+                    "editable": true,
+                    "tooltip": "Phone number should be E.164 format, exp: +13211239034"
+                },
+                {
+                    "title": "Size",
+                    "type": "integer",
+                    "name": "size",
+                    "required": false,
+                    "visible": true,
+                    "editable": true
+                },
+                {
+                    "title": "Page",
+                    "type": "integer",
+                    "name": "page",
+                    "required": false,
+                    "visible": true,
+                    "editable": true
+                }
+            ],
+            "output_schema": ""
+        },
+        {
+            "operation": "get_guest_user_details",
+            "category": "investigation",
+            "annotation": "get_guest_user_details",
+            "output_schema": "",
+            "title": "Get Guest User Details",
+            "description": "Get Guest User Details",
+            "enabled": true,
+            "parameters": [
+                {
+                    "title": "User ID",
+                    "type": "text",
+                    "name": "userid",
+                    "required": true,
+                    "visible": true,
+                    "editable": true,
+                    "tooltip": "User ID can be found via List Guest Users action"
+                }
+            ]
+        },
+        {
+            "operation": "suspend_guest_user",
+            "category": "containment",
+            "annotation": "suspend_guest_user",
+            "output_schema": "",
+            "title": "Suspend Guest User",
+            "description": "Suspend Guest User",
+            "enabled": true,
+            "parameters": [
+                {
+                    "title": "Guest Username",
+                    "type": "text",
+                    "name": "filter.name",
+                    "required": true,
+                    "visible": true,
+                    "editable": true
+                }
+            ]
+        },
+        {
+            "operation": "reinstate_guest_user",
+            "category": "containment",
+            "annotation": "reinstate_guest_user",
+            "output_schema": "",
+            "title": "Reinstate Guest User",
+            "description": "Reinstate Guest User",
+            "enabled": true,
+            "parameters": [
+                {
+                    "title": "Guest Username",
+                    "type": "text",
+                    "name": "filter.name",
+                    "required": true,
+                    "visible": true,
+                    "editable": true
+                }
+            ]
+        },
+        {
+            "operation": "quarantine_ip",
+            "category": "containment",
+            "annotation": "quarantine_ip",
+            "output_schema": {
+                "request_status": "",
+                "result": {}
+            },
+            "title": "EPS: Quarantine IP Address",
+            "description": "Quarantines an IP address that you have specified on Cisco ISE.",
+            "enabled": true,
+            "parameters": [
+                {
+                    "title": "Target IP Address",
+                    "type": "text",
+                    "name": "target_ipaddr",
+                    "required": true,
+                    "visible": true,
+                    "editable": true
+                }
+            ]
+        },
+        {
+            "operation": "quarantine_mac",
+            "category": "containment",
+            "annotation": "quarantine_mac",
+            "output_schema": {
+                "request_status": "",
+                "result": {}
+            },
+            "title": "EPS: Quarantine MAC Address",
+            "description": "Quarantines a MAC address that you have specified on Cisco ISE.",
+            "enabled": true,
+            "parameters": [
+                {
+                    "title": "Target MAC Address",
+                    "type": "text",
+                    "name": "target_mac",
+                    "required": true,
+                    "visible": true,
+                    "editable": true
+                }
+            ]
+        },
+        {
+            "operation": "unquarantine_ip",
+            "category": "containment",
+            "annotation": "unquarantine_ip",
+            "output_schema": {
+                "request_status": "",
+                "result": {}
+            },
+            "title": "EPS: Un-Quarantine IP Address",
+            "description": "Removes an IP address that you have specified from the quarantine list on Cisco ISE.",
+            "enabled": true,
+            "parameters": [
+                {
+                    "title": "Target IP Address",
+                    "type": "text",
+                    "name": "target_ipaddr",
+                    "required": true,
+                    "visible": true,
+                    "editable": true
+                }
+            ]
+        },
+        {
+            "operation": "unquarantine_mac",
+            "category": "containment",
+            "annotation": "unquarantine_mac",
+            "output_schema": {
+                "request_status": "",
+                "result": {}
+            },
+            "title": "EPS: Un-Quarantine MAC Address",
+            "description": "Removes a MAC address that you have specified from the quarantine list on Cisco ISE.",
+            "enabled": true,
+            "parameters": [
+                {
+                    "title": "Target MAC Address",
+                    "type": "text",
+                    "name": "target_mac",
+                    "required": true,
+                    "visible": true,
+                    "editable": true
+                }
+            ]
+        },
+        {
+            "operation": "end_session",
+            "category": "miscellaneous",
+            "annotation": "end_session",
+            "title": "End a Target MAC Address Session",
+            "description": "Ends a session of the MAC address that you have specified on Cisco ISE.",
+            "enabled": true,
+            "parameters": [
+                {
+                    "title": "Target MAC Address",
+                    "type": "text",
+                    "name": "target_mac",
+                    "required": true,
+                    "visible": true,
+                    "editable": true
+                }
+            ],
+            "output_schema": {
+                "request_status": "",
+                "result": {}
+            }
+        },
+        {
+            "operation": "log_system_off",
+            "category": "miscellaneous",
+            "annotation": "log_system_off",
+            "output_schema": {
+                "request_status": "",
+                "result": {}
+            },
+            "title": "MAC Address Logout",
+            "description": "Logs off a session of the MAC address that you have specified on Cisco ISE.",
+            "enabled": true,
+            "parameters": [
+                {
+                    "title": "Target MAC Address",
+                    "type": "text",
+                    "name": "target_mac",
+                    "required": true,
+                    "visible": true,
+                    "editable": true
+                },
+                {
+                    "title": "Target Server Address",
+                    "type": "text",
+                    "name": "target_server",
+                    "required": true,
+                    "visible": true,
+                    "editable": true
+                }
+            ]
+        },
+        {
+            "operation": "get_ise_endpoint",
+            "title": "Get Endpoints",
+            "description": "Retrieves details for all ERS endpoints or a specific endpoint from Cisco ISE based on the endpoint ID or name and other input parameters you have specified.",
+            "annotation": "get_ise_endpoint",
+            "category": "investigation",
+            "enabled": true,
+            "parameters": [
+                {
+                    "title": "Get Endpoint By",
+                    "type": "select",
+                    "name": "get_endpoint_by",
+                    "required": false,
+                    "visible": true,
+                    "editable": true,
+                    "options": [
+                        "Endpoint ID",
+                        "Endpoint Name"
+                    ]
+                },
+                {
+                    "title": "Size",
+                    "type": "integer",
+                    "name": "size",
+                    "required": false,
+                    "visible": true,
+                    "editable": true
+                },
+                {
+                    "title": "Page",
+                    "type": "integer",
+                    "name": "page",
+                    "required": false,
+                    "visible": true,
+                    "editable": true
+                }
+            ],
+            "conditional_output_schema": [
+                {
+                    "condition": "{{get_endpoint_by === ''}}",
+                    "output_schema": {
+                        "SearchResult": {
+                            "total": "",
+                            "resources": [
+                                {
+                                    "id": "",
+                                    "name": "",
+                                    "link": {
+                                        "rel": "",
+                                        "href": "",
+                                        "type": ""
+                                    }
+                                }
+                            ]
+                        }
+                    }
+                },
+                {
+                    "condition": "{{true}}",
+                    "output_schema": {
+                        "ERSEndPoint": {
+                            "id": "",
+                            "name": "",
+                            "description": "",
+                            "mac": "",
+                            "profileId": "",
+                            "staticProfileAssignment": "",
+                            "groupId": "",
+                            "staticGroupAssignment": "",
+                            "portalUser": "",
+                            "identityStore": "",
+                            "identityStoreId": "",
+                            "link": {
+                                "rel": "",
+                                "href": "",
+                                "type": ""
+                            }
+                        }
+                    }
+                }
+            ]
+        },
+        {
+            "operation": "get_anc_endpoint",
+            "title": "Get ANC Endpoint",
+            "description": "Retrieves details for all Adaptive Network Control (ANC) endpoints or a specific ANC endpoint from Cisco ISE based on the ANC Endpoint ID and other input parameters you have specified.",
+            "annotation": "get_anc_endpoint",
+            "category": "investigation",
+            "enabled": true,
+            "parameters": [
+                {
+                    "title": "ANC Endpoint ID",
+                    "type": "text",
+                    "name": "id",
+                    "required": false,
+                    "visible": true,
+                    "editable": true
+                },
+                {
+                    "title": "Size",
+                    "type": "integer",
+                    "name": "size",
+                    "required": false,
+                    "visible": true,
+                    "editable": true
+                },
+                {
+                    "title": "Page",
+                    "type": "integer",
+                    "name": "page",
+                    "required": false,
+                    "visible": true,
+                    "editable": true
+                }
+            ],
+            "conditional_output_schema": [
+                {
+                    "condition": "{{id === ''}}",
+                    "output_schema": {
+                        "SearchResult": {
+                            "total": "",
+                            "resources": [
+                                {
+                                    "link": {
+                                        "type": "",
+                                        "rel": "",
+                                        "href": ""
+                                    },
+                                    "id": ""
+                                }
+                            ]
+                        }
+                    }
+                },
+                {
+                    "condition": "{{true}}",
+                    "output_schema": {
+                        "ErsAncEndpoint": {
+                            "policyName": "",
+                            "id": "",
+                            "link": {
+                                "rel": "",
+                                "type": "",
+                                "href": ""
+                            },
+                            "macAddress": ""
+                        }
+                    }
+                }
+            ]
+        },
+        {
+            "operation": "create_anc_policy",
+            "title": "Create ANC Policy",
+            "description": "Creates and ANC policy in Cisco ISE based on the ANC policy name and action you have specified.",
+            "annotation": "create_policy",
+            "category": "containment",
+            "enabled": true,
+            "parameters": [
+                {
+                    "title": "ANC Policy Name",
+                    "type": "text",
+                    "name": "name",
+                    "required": true,
+                    "visible": true,
+                    "editable": true
+                },
+                {
+                    "title": "Action",
+                    "type": "multiselect",
+                    "name": "actions",
+                    "required": true,
+                    "visible": true,
+                    "editable": true
+                }
+            ],
+            "output_schema": {
+                "request_status": "",
+                "result": {}
+            }
+        },
+        {
+            "operation": "get_anc_policy",
+            "title": "Get ANC Policy",
+            "description": "Retrieves details for all ANC policies or a specific ANC policy from Cisco ISE based on the policy ID or name and other input parameters you have specified.",
+            "annotation": "get_anc_policy",
+            "category": "investigation",
+            "enabled": true,
+            "parameters": [
+                {
+                    "title": "Get Policy By",
+                    "type": "select",
+                    "name": "get_policy_by",
+                    "required": false,
+                    "visible": true,
+                    "editable": true,
+                    "options": [
+                        "Policy ID",
+                        "Policy Name"
+                    ]
+                },
+                {
+                    "title": "Size",
+                    "type": "integer",
+                    "name": "size",
+                    "required": false,
+                    "visible": true,
+                    "editable": true
+                },
+                {
+                    "title": "Page",
+                    "type": "integer",
+                    "name": "page",
+                    "required": false,
+                    "visible": true,
+                    "editable": true
+                }
+            ],
+            "conditional_output_schema": [
+                {
+                    "condition": "{{get_policy_by === ''}}",
+                    "output_schema": {
+                        "SearchResult": {
+                            "total": "",
+                            "resources": [
+                                {
+                                    "id": "",
+                                    "name": "",
+                                    "link": {
+                                        "rel": "",
+                                        "href": "",
+                                        "type": ""
+                                    }
+                                }
+                            ]
+                        }
+                    }
+                },
+                {
+                    "condition": "{{true}}",
+                    "output_schema": {
+                        "ErsAncPolicy": {
+                            "id": "",
+                            "name": "",
+                            "actions": [],
+                            "link": {
+                                "rel": "",
+                                "href": "",
+                                "type": ""
+                            }
+                        }
+                    }
+                }
+            ]
+        },
+        {
+            "operation": "assign_policy",
+            "title": "Assign ANC Policy",
+            "description": "Assigns a specific ANC policy to a MAC address or an IP address on Cisco ISE based on the policy or name and the MAC or IP address you have specified.",
+            "annotation": "assign_policy",
+            "category": "containment",
+            "enabled": true,
+            "parameters": [
+                {
+                    "title": "ANC Policy Name",
+                    "type": "text",
+                    "name": "policyName",
+                    "required": true,
+                    "visible": true,
+                    "editable": true
+                },
+                {
+                    "title": "Apply To",
+                    "type": "select",
+                    "name": "apply_to",
+                    "required": true,
+                    "visible": true,
+                    "editable": true,
+                    "options": [
+                        "MAC Address",
+                        "IP Address"
+                    ]
+                }
+            ],
+            "output_schema": {
+                "request_status": "",
+                "result": {}
+            }
+        },
+        {
+            "operation": "revoke_policy",
+            "title": "Revoke ANC Policy",
+            "description": "Revokes a specific ANC policy from a MAC address or an IP address on Cisco ISE based on the policy or name and the MAC or IP address you have specified.",
+            "annotation": "revoke_policy",
+            "category": "remediation",
+            "enabled": true,
+            "parameters": [
+                {
+                    "title": "ANC Policy Name",
+                    "type": "text",
+                    "name": "policyName",
+                    "required": true,
+                    "visible": true,
+                    "editable": true
+                },
+                {
+                    "title": "Revoke From",
+                    "type": "select",
+                    "name": "revoke_from",
+                    "required": true,
+                    "visible": true,
+                    "editable": true,
+                    "options": [
+                        "MAC Address",
+                        "IP Address"
+                    ]
+                }
+            ],
+            "output_schema": {
+                "request_status": "",
+                "result": {}
+            }
+        }
+    ],
+    "icon_medium_name": "",
+    "cs_approved": false,
+    "cs_compatible": true,
+    "help_online": "https://help.cybersponse.com/support/solutions/articles/17000098966-cisco-ise-v2-1-0"
+}
