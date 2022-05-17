@@ -1,0 +1,1095 @@
+{
+  "type": "workflow_collections",
+  "data": [
+    {
+      "@type": "WorkflowCollection",
+      "name": "Sample - Cisco ISE - 2.0.0",
+      "description": "Playbook collection for Cisco ISE connector to perform the operations like list all active sessions, quarantine IP/Mac address, unquarantine IP/Mac address, assign ANC policy etc.",
+      "visible": true,
+      "image": null,
+      "workflows": [
+        {
+          "@type": "Workflow",
+          "triggerLimit": null,
+          "name": "EPS: Quarantine IP Address",
+          "aliasName": null,
+          "description": "Quarantines an IP address that you have specified on Cisco ISE.",
+          "collection": "/api/3/workflow_collections/63ab2aa3-90a2-4e14-b79d-8dc0fb7507f2",
+          "tag": "#Cisco ISE",
+          "isActive": false,
+          "singleRecordExecution": false,
+          "remoteExecutableFlag": false,
+          "parameters": [],
+          "synchronous": false,
+          "triggerStep": "/api/3/workflow_steps/3db49091-612f-4ed4-83c6-546858cc1f87",
+          "steps": [
+            {
+              "@type": "WorkflowStep",
+              "name": "Alerts",
+              "description": null,
+              "arguments": {
+                "route": "3f0117af-0931-4baf-8498-ea9fa09e466d",
+                "title": "Cisco ISE: EPS: Quarantine IP Address",
+                "resources": [
+                  "alerts"
+                ],
+                "inputVariables": [],
+                "step_variables": {
+                  "input": {
+                    "records": "{{vars.input.records[0]}}"
+                  }
+                },
+                "noRecordExecution": true,
+                "singleRecordExecution": false
+              },
+              "status": null,
+              "left": "20",
+              "top": "20",
+              "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a",
+              "uuid": "3db49091-612f-4ed4-83c6-546858cc1f87"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "EPS: Quarantine IP Address",
+              "description": null,
+              "arguments": {
+                "name": "Cisco ISE",
+                "config": "",
+                "params": {
+                  "target_ipaddr": "1.1.1.1"
+                },
+                "version": "2.0.0",
+                "connector": "cisco-ise",
+                "operation": "quarantine_ip",
+                "operationTitle": "EPS: Quarantine IP Address",
+                "step_variables": {
+                  "output_data": "{{vars.result}}"
+                }
+              },
+              "status": null,
+              "left": "188",
+              "top": "120",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
+              "uuid": "edf4ecce-78be-4495-b6d9-5368882036dd"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "uuid": "63c76465-0786-45d4-bdc4-37cc82ae8ecc",
+              "name": "Alerts -> EPS: Quarantine IP Address",
+              "label": null,
+              "isExecuted": false,
+              "targetStep": "/api/3/workflow_steps/edf4ecce-78be-4495-b6d9-5368882036dd",
+              "sourceStep": "/api/3/workflow_steps/3db49091-612f-4ed4-83c6-546858cc1f87"
+            }
+          ],
+          "versions": null,
+          "lastModifyDate": 1579244194,
+          "uuid": "bea035f3-b98a-4eb9-9815-27851a641562",
+          "isPrivate": false,
+          "owners": []
+        },
+        {
+          "@type": "Workflow",
+          "triggerLimit": null,
+          "name": "Get ANC Policy",
+          "aliasName": null,
+          "description": "Retrieves details for all Adaptive Network Control (ANC) policies or specific policy from Cisco ISE based on the ANC policy ID/Name you have specified.",
+          "collection": "/api/3/workflow_collections/63ab2aa3-90a2-4e14-b79d-8dc0fb7507f2",
+          "tag": "#Cisco ISE",
+          "isActive": false,
+          "singleRecordExecution": false,
+          "remoteExecutableFlag": false,
+          "parameters": [],
+          "synchronous": false,
+          "triggerStep": "/api/3/workflow_steps/d2c43347-49dd-445c-9a23-91de85273bad",
+          "steps": [
+            {
+              "@type": "WorkflowStep",
+              "name": "Alerts",
+              "description": null,
+              "arguments": {
+                "route": "75178fc1-19e8-4d53-96af-48a3850e0deb",
+                "title": "Cisco ISE: Get ANC Policy",
+                "resources": [
+                  "alerts"
+                ],
+                "inputVariables": [],
+                "step_variables": {
+                  "input": {
+                    "records": "{{vars.input.records[0]}}"
+                  }
+                },
+                "noRecordExecution": true,
+                "singleRecordExecution": false
+              },
+              "status": null,
+              "left": "20",
+              "top": "20",
+              "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a",
+              "uuid": "d2c43347-49dd-445c-9a23-91de85273bad"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Get ANC Policy",
+              "description": null,
+              "arguments": {
+                "name": "Cisco ISE",
+                "config": "",
+                "params": {
+                  "get_policy_by": "",
+                  "size": "",
+                  "page": ""
+                },
+                "version": "2.0.0",
+                "connector": "cisco-ise",
+                "operation": "get_anc_policy",
+                "operationTitle": "Get ANC Policy",
+                "step_variables": {
+                  "output_data": "{{vars.result}}"
+                }
+              },
+              "status": null,
+              "left": "188",
+              "top": "120",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
+              "uuid": "623c156c-b259-42f8-bef5-acd6fd319f19"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "uuid": "7c9f8b87-6e0c-4dc9-8cbf-1c6ec8731fc6",
+              "name": "Alerts -> Get ANC Policy",
+              "label": null,
+              "isExecuted": false,
+              "targetStep": "/api/3/workflow_steps/623c156c-b259-42f8-bef5-acd6fd319f19",
+              "sourceStep": "/api/3/workflow_steps/d2c43347-49dd-445c-9a23-91de85273bad"
+            }
+          ],
+          "versions": null,
+          "lastModifyDate": 1579244766,
+          "uuid": "6cfd7af1-f006-4f8b-99bb-9b24e8c8b0b6",
+          "isPrivate": false,
+          "owners": []
+        },
+        {
+          "@type": "Workflow",
+          "triggerLimit": null,
+          "name": "Assign ANC Policy",
+          "aliasName": null,
+          "description": "Apply Adaptive Network Control (ANC) policy to MAC address or IP address on Cisco ISE.",
+          "collection": "/api/3/workflow_collections/63ab2aa3-90a2-4e14-b79d-8dc0fb7507f2",
+          "tag": "#Cisco ISE",
+          "isActive": false,
+          "singleRecordExecution": false,
+          "remoteExecutableFlag": false,
+          "parameters": [],
+          "synchronous": false,
+          "triggerStep": "/api/3/workflow_steps/d9a9515f-bb22-4d13-8274-0d003f02ebeb",
+          "steps": [
+            {
+              "@type": "WorkflowStep",
+              "name": "Alerts",
+              "description": null,
+              "arguments": {
+                "route": "fb3c33ab-13fe-41ef-9591-fc6cb5d23eeb",
+                "title": "Cisco ISE: Assign ANC Policy",
+                "resources": [
+                  "alerts"
+                ],
+                "inputVariables": [],
+                "step_variables": {
+                  "input": {
+                    "records": "{{vars.input.records[0]}}"
+                  }
+                },
+                "noRecordExecution": true,
+                "singleRecordExecution": false
+              },
+              "status": null,
+              "left": "20",
+              "top": "20",
+              "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a",
+              "uuid": "d9a9515f-bb22-4d13-8274-0d003f02ebeb"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Assign ANC Policy",
+              "description": null,
+              "arguments": {
+                "name": "Cisco ISE",
+                "config": "",
+                "params": {
+                  "apply_to": "MAC Address",
+                  "macAddress": "C8:B3:01:C9:DC:0B",
+                  "policyName": "CyOPs_Policy"
+                },
+                "version": "2.0.0",
+                "connector": "cisco-ise",
+                "operation": "assign_policy",
+                "operationTitle": "Assign ANC Policy",
+                "step_variables": {
+                  "output_data": "{{vars.result}}"
+                }
+              },
+              "status": null,
+              "left": "188",
+              "top": "120",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
+              "uuid": "28288d7b-4b72-4ec1-bdf8-7083bf5be7df"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "uuid": "927ef0fb-2f0c-4ed1-8892-da6ee4722acd",
+              "name": "Alerts -> Assign ANC Policy",
+              "label": null,
+              "isExecuted": false,
+              "targetStep": "/api/3/workflow_steps/28288d7b-4b72-4ec1-bdf8-7083bf5be7df",
+              "sourceStep": "/api/3/workflow_steps/d9a9515f-bb22-4d13-8274-0d003f02ebeb"
+            }
+          ],
+          "versions": null,
+          "lastModifyDate": 1579250404,
+          "uuid": "2dcb9608-f19e-4094-a01a-bfd10e6d6bc9",
+          "isPrivate": false,
+          "owners": []
+        },
+        {
+          "@type": "Workflow",
+          "triggerLimit": null,
+          "name": "End a Target MAC Address Session",
+          "aliasName": null,
+          "description": "Ends a session of the MAC address that you have specified on Cisco ISE.",
+          "collection": "/api/3/workflow_collections/63ab2aa3-90a2-4e14-b79d-8dc0fb7507f2",
+          "tag": "#Cisco ISE",
+          "isActive": false,
+          "singleRecordExecution": false,
+          "remoteExecutableFlag": false,
+          "parameters": [],
+          "synchronous": false,
+          "triggerStep": "/api/3/workflow_steps/e4936b16-0411-426e-a27a-cd5c3468baca",
+          "steps": [
+            {
+              "@type": "WorkflowStep",
+              "name": "Alerts",
+              "description": null,
+              "arguments": {
+                "route": "6841545d-37bf-48eb-b629-05bae907aa37",
+                "title": "Cisco ISE: End a Target MAC Address Session",
+                "resources": [
+                  "alerts"
+                ],
+                "inputVariables": [],
+                "step_variables": {
+                  "input": {
+                    "records": "{{vars.input.records[0]}}"
+                  }
+                },
+                "noRecordExecution": true,
+                "singleRecordExecution": false
+              },
+              "status": null,
+              "left": "20",
+              "top": "20",
+              "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a",
+              "uuid": "e4936b16-0411-426e-a27a-cd5c3468baca"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "End a Target MAC Address Session",
+              "description": null,
+              "arguments": {
+                "name": "Cisco ISE",
+                "config": "",
+                "params": {
+                  "target_mac": "C8:B3:01:C9:DC:0B"
+                },
+                "version": "2.0.0",
+                "connector": "cisco-ise",
+                "operation": "end_session",
+                "operationTitle": "End a Target MAC Address Session",
+                "step_variables": {
+                  "output_data": "{{vars.result}}"
+                }
+              },
+              "status": null,
+              "left": "188",
+              "top": "120",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
+              "uuid": "c8e6d921-1b93-4e98-b3bc-691b9bb98c54"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "uuid": "bf2a4293-5d8b-44d8-acf1-7aa844813901",
+              "name": "Alerts -> End a Target MAC Address Session",
+              "label": null,
+              "isExecuted": false,
+              "targetStep": "/api/3/workflow_steps/c8e6d921-1b93-4e98-b3bc-691b9bb98c54",
+              "sourceStep": "/api/3/workflow_steps/e4936b16-0411-426e-a27a-cd5c3468baca"
+            }
+          ],
+          "versions": null,
+          "lastModifyDate": 1579250281,
+          "uuid": "88995e5e-cc20-4bd0-8694-506d04aa302a",
+          "isPrivate": false,
+          "owners": []
+        },
+        {
+          "@type": "Workflow",
+          "triggerLimit": null,
+          "name": "Revoke ANC Policy",
+          "aliasName": null,
+          "description": "Revoke Adaptive Network Control (ANC) policy from MAC address or IP address on Cisco ISE.",
+          "collection": "/api/3/workflow_collections/63ab2aa3-90a2-4e14-b79d-8dc0fb7507f2",
+          "tag": "#Cisco ISE",
+          "isActive": false,
+          "singleRecordExecution": false,
+          "remoteExecutableFlag": false,
+          "parameters": [],
+          "synchronous": false,
+          "triggerStep": "/api/3/workflow_steps/87cd7abc-07be-4d97-99de-b7821484d36f",
+          "steps": [
+            {
+              "@type": "WorkflowStep",
+              "name": "Alerts",
+              "description": null,
+              "arguments": {
+                "route": "d3f32eea-e00a-4374-9bf2-b0a3485c06de",
+                "title": "Cisco ISE: Revoke ANC Policy",
+                "resources": [
+                  "alerts"
+                ],
+                "inputVariables": [],
+                "step_variables": {
+                  "input": {
+                    "records": "{{vars.input.records[0]}}"
+                  }
+                },
+                "noRecordExecution": true,
+                "singleRecordExecution": false
+              },
+              "status": null,
+              "left": "20",
+              "top": "20",
+              "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a",
+              "uuid": "87cd7abc-07be-4d97-99de-b7821484d36f"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Revoke ANC Policy",
+              "description": null,
+              "arguments": {
+                "name": "Cisco ISE",
+                "config": "",
+                "params": {
+                  "macAddress": "C8:B3:01:C9:DC:0B",
+                  "policyName": "CyOPs_Policy",
+                  "revoke_from": "MAC Address"
+                },
+                "version": "2.0.0",
+                "connector": "cisco-ise",
+                "operation": "revoke_policy",
+                "operationTitle": "Revoke ANC Policy",
+                "step_variables": {
+                  "output_data": "{{vars.result}}"
+                }
+              },
+              "status": null,
+              "left": "188",
+              "top": "120",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
+              "uuid": "967e9a82-7446-475e-8085-646822f36a33"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "uuid": "90d0ad43-ee4a-449d-bedd-348e8777ee67",
+              "name": "Alerts -> Revoke ANC Policy",
+              "label": null,
+              "isExecuted": false,
+              "targetStep": "/api/3/workflow_steps/967e9a82-7446-475e-8085-646822f36a33",
+              "sourceStep": "/api/3/workflow_steps/87cd7abc-07be-4d97-99de-b7821484d36f"
+            }
+          ],
+          "versions": null,
+          "lastModifyDate": 1579253371,
+          "uuid": "e29da499-f90d-4c1e-87a1-70d837ed14f3",
+          "isPrivate": false,
+          "owners": []
+        },
+        {
+          "@type": "Workflow",
+          "triggerLimit": null,
+          "name": "MAC Address Logout",
+          "aliasName": null,
+          "description": "Logs off a session of the MAC address that you have specified on Cisco ISE.",
+          "collection": "/api/3/workflow_collections/63ab2aa3-90a2-4e14-b79d-8dc0fb7507f2",
+          "tag": "#Cisco ISE",
+          "isActive": false,
+          "singleRecordExecution": false,
+          "remoteExecutableFlag": false,
+          "parameters": [],
+          "synchronous": false,
+          "triggerStep": "/api/3/workflow_steps/c0923e3b-f15f-4bbc-8ccc-4b801ce19705",
+          "steps": [
+            {
+              "@type": "WorkflowStep",
+              "name": "Alerts",
+              "description": null,
+              "arguments": {
+                "route": "584ce47e-ff45-42c9-9594-be7d37924d34",
+                "title": "Cisco ISE: MAC Address Logout",
+                "resources": [
+                  "alerts"
+                ],
+                "inputVariables": [],
+                "step_variables": {
+                  "input": {
+                    "records": "{{vars.input.records[0]}}"
+                  }
+                },
+                "noRecordExecution": true,
+                "singleRecordExecution": false
+              },
+              "status": null,
+              "left": "20",
+              "top": "20",
+              "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a",
+              "uuid": "c0923e3b-f15f-4bbc-8ccc-4b801ce19705"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "MAC Address Logout",
+              "description": null,
+              "arguments": {
+                "name": "Cisco ISE",
+                "config": "",
+                "params": {
+                  "target_mac": "C8:B3:01:C9:DC:0B",
+                  "target_server": "1.1.1.1"
+                },
+                "version": "2.0.0",
+                "connector": "cisco-ise",
+                "operation": "log_system_off",
+                "operationTitle": "MAC Address Logout",
+                "step_variables": {
+                  "output_data": "{{vars.result}}"
+                }
+              },
+              "status": null,
+              "left": "188",
+              "top": "120",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
+              "uuid": "01f05d40-a5bb-49cd-b587-28909b0dca83"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "uuid": "eb1f0ebb-4d4e-420f-88f1-59740f140c07",
+              "name": "Alerts -> MAC Address Logout",
+              "label": null,
+              "isExecuted": false,
+              "targetStep": "/api/3/workflow_steps/01f05d40-a5bb-49cd-b587-28909b0dca83",
+              "sourceStep": "/api/3/workflow_steps/c0923e3b-f15f-4bbc-8ccc-4b801ce19705"
+            }
+          ],
+          "versions": null,
+          "lastModifyDate": 1579250257,
+          "uuid": "f3983a84-f06f-4eb0-ae49-6caebe0c61b6",
+          "isPrivate": false,
+          "owners": []
+        },
+        {
+          "@type": "Workflow",
+          "triggerLimit": null,
+          "name": "Get Endpoints",
+          "aliasName": null,
+          "description": "Retrieves details for all ERS endpoints or specific endpoint from Cisco ISE based on the Endpoint ID/Name you have specified.",
+          "collection": "/api/3/workflow_collections/63ab2aa3-90a2-4e14-b79d-8dc0fb7507f2",
+          "tag": "#Cisco ISE",
+          "isActive": false,
+          "singleRecordExecution": false,
+          "remoteExecutableFlag": false,
+          "parameters": [],
+          "synchronous": false,
+          "triggerStep": "/api/3/workflow_steps/85bb382b-07c6-4a1b-8a14-91a7f2b6ea27",
+          "steps": [
+            {
+              "@type": "WorkflowStep",
+              "name": "Alerts",
+              "description": null,
+              "arguments": {
+                "route": "7c179925-77b3-44d7-849f-38e865a7dfff",
+                "title": "Cisco ISE: Get Endpoints",
+                "resources": [
+                  "alerts"
+                ],
+                "inputVariables": [],
+                "step_variables": {
+                  "input": {
+                    "records": "{{vars.input.records[0]}}"
+                  }
+                },
+                "noRecordExecution": true,
+                "singleRecordExecution": false
+              },
+              "status": null,
+              "left": "20",
+              "top": "20",
+              "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a",
+              "uuid": "85bb382b-07c6-4a1b-8a14-91a7f2b6ea27"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Get Endpoints",
+              "description": null,
+              "arguments": {
+                "name": "Cisco ISE",
+                "config": "",
+                "params": {
+                  "id": "",
+                  "endpoint_name": "",
+                  "get_endpoint_by": "",
+                  "size": "",
+                  "page": ""
+                },
+                "version": "2.0.0",
+                "connector": "cisco-ise",
+                "operation": "get_ise_endpoint",
+                "operationTitle": "Get Endpoints",
+                "step_variables": {
+                  "output_data": "{{vars.result}}"
+                }
+              },
+              "status": null,
+              "left": "188",
+              "top": "120",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
+              "uuid": "dc900bcb-4d9a-4880-8ced-227d7f4fc83f"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "uuid": "64bbcb9d-429d-4e87-97fa-253da9eecb19",
+              "name": "Alerts -> Get Endpoints",
+              "label": null,
+              "isExecuted": false,
+              "targetStep": "/api/3/workflow_steps/dc900bcb-4d9a-4880-8ced-227d7f4fc83f",
+              "sourceStep": "/api/3/workflow_steps/85bb382b-07c6-4a1b-8a14-91a7f2b6ea27"
+            }
+          ],
+          "versions": null,
+          "lastModifyDate": 1579245063,
+          "uuid": "bd905b0c-7140-4961-8768-d0291d576d7a",
+          "isPrivate": false,
+          "owners": []
+        },
+        {
+          "@type": "Workflow",
+          "triggerLimit": null,
+          "name": "Get ANC Endpoint",
+          "aliasName": null,
+          "description": "Retrieves details for all Adaptive Network Control (ANC) endpoints or specific endpoint from Cisco ISE based on the ANC Endpoint ID you have specified.",
+          "collection": "/api/3/workflow_collections/63ab2aa3-90a2-4e14-b79d-8dc0fb7507f2",
+          "tag": "#Cisco ISE",
+          "isActive": false,
+          "singleRecordExecution": false,
+          "remoteExecutableFlag": false,
+          "parameters": [],
+          "synchronous": false,
+          "triggerStep": "/api/3/workflow_steps/c342b4ec-254e-4ffe-8c08-67a6b9b885b7",
+          "steps": [
+            {
+              "@type": "WorkflowStep",
+              "name": "Alerts",
+              "description": null,
+              "arguments": {
+                "route": "2d986671-7431-492b-8717-f665fbafaae7",
+                "title": "Cisco ISE: Get ANC Endpoint",
+                "resources": [
+                  "alerts"
+                ],
+                "inputVariables": [],
+                "step_variables": {
+                  "input": {
+                    "records": "{{vars.input.records[0]}}"
+                  }
+                },
+                "noRecordExecution": true,
+                "singleRecordExecution": false
+              },
+              "status": null,
+              "left": "20",
+              "top": "20",
+              "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a",
+              "uuid": "c342b4ec-254e-4ffe-8c08-67a6b9b885b7"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Get ANC Endpoint",
+              "description": null,
+              "arguments": {
+                "name": "Cisco ISE",
+                "config": "",
+                "params": {
+                  "id": "",
+                  "size": "",
+                  "page": ""
+                },
+                "version": "2.0.0",
+                "connector": "cisco-ise",
+                "operation": "get_anc_endpoint",
+                "operationTitle": "Get ANC Endpoint",
+                "step_variables": {
+                  "output_data": "{{vars.result}}"
+                }
+              },
+              "status": null,
+              "left": "188",
+              "top": "120",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
+              "uuid": "59df728e-2d20-4c96-8f6a-d4b5b2856630"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "uuid": "73c50752-da4f-4b47-b81e-94346f985186",
+              "name": "Alerts -> Get ANC Endpoint",
+              "label": null,
+              "isExecuted": false,
+              "targetStep": "/api/3/workflow_steps/59df728e-2d20-4c96-8f6a-d4b5b2856630",
+              "sourceStep": "/api/3/workflow_steps/c342b4ec-254e-4ffe-8c08-67a6b9b885b7"
+            }
+          ],
+          "versions": null,
+          "lastModifyDate": 1579178002,
+          "uuid": "7a174943-1e7b-4cf1-84b2-23e32f4c2ba0",
+          "isPrivate": false,
+          "owners": []
+        },
+        {
+          "@type": "Workflow",
+          "triggerLimit": null,
+          "name": "EPS: Un-Quarantine MAC Address",
+          "aliasName": null,
+          "description": "Removes a MAC address that you have specified from the quarantine list on Cisco ISE.",
+          "collection": "/api/3/workflow_collections/63ab2aa3-90a2-4e14-b79d-8dc0fb7507f2",
+          "tag": "#Cisco ISE",
+          "isActive": false,
+          "singleRecordExecution": false,
+          "remoteExecutableFlag": false,
+          "parameters": [],
+          "synchronous": false,
+          "triggerStep": "/api/3/workflow_steps/eab93636-1865-4316-8850-5f98671ed8d2",
+          "steps": [
+            {
+              "@type": "WorkflowStep",
+              "name": "Alerts",
+              "description": null,
+              "arguments": {
+                "route": "c3251dc3-b925-49bd-9fb5-4979480827a0",
+                "title": "Cisco ISE: EPS: Un-Quarantine MAC Address",
+                "resources": [
+                  "alerts"
+                ],
+                "inputVariables": [],
+                "step_variables": {
+                  "input": {
+                    "records": "{{vars.input.records[0]}}"
+                  }
+                },
+                "noRecordExecution": true,
+                "singleRecordExecution": false
+              },
+              "status": null,
+              "left": "20",
+              "top": "20",
+              "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a",
+              "uuid": "eab93636-1865-4316-8850-5f98671ed8d2"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "EPS: UnQuarantine MAC Address",
+              "description": null,
+              "arguments": {
+                "name": "Cisco ISE",
+                "config": "",
+                "params": {
+                  "target_mac": "C8:B3:01:C9:DC:0B"
+                },
+                "version": "2.0.0",
+                "connector": "cisco-ise",
+                "operation": "unquarantine_mac",
+                "operationTitle": "EPS: Un-Quarantine MAC Address",
+                "step_variables": {
+                  "output_data": "{{vars.result}}"
+                }
+              },
+              "status": null,
+              "left": "188",
+              "top": "120",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
+              "uuid": "cfb9cba7-cf97-4afd-8424-6d8f2cca4bb8"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "uuid": "16064cbb-d324-4c6a-8c95-a7af1fd20698",
+              "name": "Alerts -> EPS: Un-Quarantine MAC Address",
+              "label": null,
+              "isExecuted": false,
+              "targetStep": "/api/3/workflow_steps/cfb9cba7-cf97-4afd-8424-6d8f2cca4bb8",
+              "sourceStep": "/api/3/workflow_steps/eab93636-1865-4316-8850-5f98671ed8d2"
+            }
+          ],
+          "versions": null,
+          "lastModifyDate": 1579250295,
+          "uuid": "556ac883-1c28-43e3-af06-0f20d8fa7309",
+          "isPrivate": false,
+          "owners": []
+        },
+        {
+          "@type": "Workflow",
+          "triggerLimit": null,
+          "name": "EPS: Quarantine MAC Address",
+          "aliasName": null,
+          "description": "Quarantines a MAC address that you have specified on Cisco ISE.",
+          "collection": "/api/3/workflow_collections/63ab2aa3-90a2-4e14-b79d-8dc0fb7507f2",
+          "tag": "#Cisco ISE",
+          "isActive": false,
+          "singleRecordExecution": false,
+          "remoteExecutableFlag": false,
+          "parameters": [],
+          "synchronous": false,
+          "triggerStep": "/api/3/workflow_steps/aa38b76f-c761-4149-88c2-8bd004765a2a",
+          "steps": [
+            {
+              "@type": "WorkflowStep",
+              "name": "Alerts",
+              "description": null,
+              "arguments": {
+                "route": "9884077e-6a29-4631-b63c-9d890ec06c3b",
+                "title": "Cisco ISE: EPS: Quarantine MAC Address",
+                "resources": [
+                  "alerts"
+                ],
+                "inputVariables": [],
+                "step_variables": {
+                  "input": {
+                    "records": "{{vars.input.records[0]}}"
+                  }
+                },
+                "noRecordExecution": true,
+                "singleRecordExecution": false
+              },
+              "status": null,
+              "left": "20",
+              "top": "20",
+              "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a",
+              "uuid": "aa38b76f-c761-4149-88c2-8bd004765a2a"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "EPS: Quarantine MAC Address",
+              "description": null,
+              "arguments": {
+                "name": "Cisco ISE",
+                "config": "",
+                "params": {
+                  "target_mac": "C8:B3:01:C9:DC:0B"
+                },
+                "version": "2.0.0",
+                "connector": "cisco-ise",
+                "operation": "quarantine_mac",
+                "operationTitle": "EPS: Quarantine MAC Address",
+                "step_variables": {
+                  "output_data": "{{vars.result}}"
+                }
+              },
+              "status": null,
+              "left": "188",
+              "top": "120",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
+              "uuid": "91770d04-5ec0-46ba-8021-e8e89136863d"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "uuid": "86d79857-78ad-429b-8d55-0f85375d3141",
+              "name": "Alerts -> EPS: Quarantine MAC Address",
+              "label": null,
+              "isExecuted": false,
+              "targetStep": "/api/3/workflow_steps/91770d04-5ec0-46ba-8021-e8e89136863d",
+              "sourceStep": "/api/3/workflow_steps/aa38b76f-c761-4149-88c2-8bd004765a2a"
+            }
+          ],
+          "versions": null,
+          "lastModifyDate": 1579250049,
+          "uuid": "8f208d3d-e100-4b7e-a872-c97ac0c6246a",
+          "isPrivate": false,
+          "owners": []
+        },
+        {
+          "@type": "Workflow",
+          "triggerLimit": null,
+          "name": "EPS: Un-Quarantine IP Address",
+          "aliasName": null,
+          "description": "Removes an IP address that you have specified from the quarantine list on Cisco ISE.",
+          "collection": "/api/3/workflow_collections/63ab2aa3-90a2-4e14-b79d-8dc0fb7507f2",
+          "tag": "#Cisco ISE",
+          "isActive": false,
+          "singleRecordExecution": false,
+          "remoteExecutableFlag": false,
+          "parameters": [],
+          "synchronous": false,
+          "triggerStep": "/api/3/workflow_steps/927b074c-78a8-4c43-9c5a-458c6191e327",
+          "steps": [
+            {
+              "@type": "WorkflowStep",
+              "name": "Alerts",
+              "description": null,
+              "arguments": {
+                "route": "273d72e7-6098-4136-adef-2ac93e26d3df",
+                "title": "Cisco ISE: EPS: Un-Quarantine IP Address",
+                "resources": [
+                  "alerts"
+                ],
+                "inputVariables": [],
+                "step_variables": {
+                  "input": {
+                    "records": "{{vars.input.records[0]}}"
+                  }
+                },
+                "noRecordExecution": true,
+                "singleRecordExecution": false
+              },
+              "status": null,
+              "left": "20",
+              "top": "20",
+              "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a",
+              "uuid": "927b074c-78a8-4c43-9c5a-458c6191e327"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "EPS: UnQuarantine IP Address",
+              "description": null,
+              "arguments": {
+                "name": "Cisco ISE",
+                "config": "",
+                "params": {
+                  "target_ipaddr": "1.1.1.1"
+                },
+                "version": "2.0.0",
+                "connector": "cisco-ise",
+                "operation": "unquarantine_ip",
+                "operationTitle": "EPS: Un-Quarantine IP Address",
+                "step_variables": {
+                  "output_data": "{{vars.result}}"
+                }
+              },
+              "status": null,
+              "left": "188",
+              "top": "120",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
+              "uuid": "8383f664-71d0-4d77-aa06-9e6756041f8c"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "uuid": "ef90e914-c81f-4194-aefb-973796c7a89e",
+              "name": "Alerts -> EPS: Un-Quarantine IP Address",
+              "label": null,
+              "isExecuted": false,
+              "targetStep": "/api/3/workflow_steps/8383f664-71d0-4d77-aa06-9e6756041f8c",
+              "sourceStep": "/api/3/workflow_steps/927b074c-78a8-4c43-9c5a-458c6191e327"
+            }
+          ],
+          "versions": null,
+          "lastModifyDate": 1579244284,
+          "uuid": "6361f7e1-8757-465d-a366-c57c5680ada0",
+          "isPrivate": false,
+          "owners": []
+        },
+        {
+          "@type": "Workflow",
+          "triggerLimit": null,
+          "name": "List All Active Sessions",
+          "aliasName": null,
+          "description": "Retrieves a list of all active sessions from Cisco ISE.",
+          "collection": "/api/3/workflow_collections/63ab2aa3-90a2-4e14-b79d-8dc0fb7507f2",
+          "tag": "#Cisco ISE",
+          "isActive": false,
+          "singleRecordExecution": false,
+          "remoteExecutableFlag": false,
+          "parameters": [],
+          "synchronous": false,
+          "triggerStep": "/api/3/workflow_steps/b993135d-9b67-4176-bd1e-ae1285be7fa9",
+          "steps": [
+            {
+              "@type": "WorkflowStep",
+              "name": "Alerts",
+              "description": null,
+              "arguments": {
+                "route": "fac10b01-8a8d-457e-9912-ba139cbba80a",
+                "title": "Cisco ISE: List All Active Sessions",
+                "resources": [
+                  "alerts"
+                ],
+                "inputVariables": [],
+                "step_variables": {
+                  "input": {
+                    "records": "{{vars.input.records[0]}}"
+                  }
+                },
+                "noRecordExecution": true,
+                "singleRecordExecution": false
+              },
+              "status": null,
+              "left": "20",
+              "top": "20",
+              "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a",
+              "uuid": "b993135d-9b67-4176-bd1e-ae1285be7fa9"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "List All Active Sessions",
+              "description": null,
+              "arguments": {
+                "name": "Cisco ISE",
+                "config": "",
+                "params": [],
+                "version": "2.0.0",
+                "connector": "cisco-ise",
+                "operation": "list_active_sessions",
+                "operationTitle": "List All Active Sessions",
+                "step_variables": {
+                  "output_data": "{{vars.result}}"
+                }
+              },
+              "status": null,
+              "left": "188",
+              "top": "120",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
+              "uuid": "3797abad-0b21-4628-8886-c17f32f0850f"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "uuid": "1acc1caf-cd2a-4b66-a9e5-ccd89959135b",
+              "name": "Alerts -> List All Active Sessions",
+              "label": null,
+              "isExecuted": false,
+              "targetStep": "/api/3/workflow_steps/3797abad-0b21-4628-8886-c17f32f0850f",
+              "sourceStep": "/api/3/workflow_steps/b993135d-9b67-4176-bd1e-ae1285be7fa9"
+            }
+          ],
+          "versions": null,
+          "lastModifyDate": 1579244380,
+          "uuid": "f8c8b715-b8b0-4e5b-959f-2f26b1c482c0",
+          "isPrivate": false,
+          "owners": []
+        },
+        {
+          "@type": "Workflow",
+          "triggerLimit": null,
+          "name": "Create ANC Policy",
+          "aliasName": null,
+          "description": "Create Adaptive Network Control (ANC) policy in Cisco ISE.",
+          "collection": "/api/3/workflow_collections/63ab2aa3-90a2-4e14-b79d-8dc0fb7507f2",
+          "tag": "#Cisco ISE",
+          "isActive": false,
+          "singleRecordExecution": false,
+          "remoteExecutableFlag": false,
+          "parameters": [],
+          "synchronous": false,
+          "triggerStep": "/api/3/workflow_steps/8374af27-bebb-4677-a81b-a8bb2aa1bdbd",
+          "steps": [
+            {
+              "@type": "WorkflowStep",
+              "name": "Alerts",
+              "description": null,
+              "arguments": {
+                "route": "8d3e167f-2b27-41ce-928d-9e1eff587fdb",
+                "title": "Cisco ISE: Create ANC Policy",
+                "resources": [
+                  "alerts"
+                ],
+                "inputVariables": [],
+                "step_variables": {
+                  "input": {
+                    "records": "{{vars.input.records[0]}}"
+                  }
+                },
+                "noRecordExecution": true,
+                "singleRecordExecution": false
+              },
+              "status": null,
+              "left": "20",
+              "top": "20",
+              "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a",
+              "uuid": "8374af27-bebb-4677-a81b-a8bb2aa1bdbd"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Create ANC Policy",
+              "description": null,
+              "arguments": {
+                "name": "Cisco ISE",
+                "config": "",
+                "params": {
+                  "name": "CyOPs_Policy",
+                  "actions": [
+                    "QUARANTINE"
+                  ]
+                },
+                "version": "2.0.0",
+                "connector": "cisco-ise",
+                "operation": "create_anc_policy",
+                "operationTitle": "Create ANC Policy",
+                "step_variables": {
+                  "output_data": "{{vars.result}}"
+                }
+              },
+              "status": null,
+              "left": "188",
+              "top": "120",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
+              "uuid": "eb4b0495-9411-4987-a2c6-8b1315cb85ed"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "uuid": "46f48fdf-5e30-4805-9def-4e59fd18f983",
+              "name": "Alerts -> Create ANC Policy",
+              "label": null,
+              "isExecuted": false,
+              "targetStep": "/api/3/workflow_steps/eb4b0495-9411-4987-a2c6-8b1315cb85ed",
+              "sourceStep": "/api/3/workflow_steps/8374af27-bebb-4677-a81b-a8bb2aa1bdbd"
+            }
+          ],
+          "versions": null,
+          "lastModifyDate": 1579173351,
+          "uuid": "cb2f3bd3-738e-4497-8fdb-5ee19a2edea6",
+          "isPrivate": false,
+          "owners": []
+        }
+      ],
+      "uuid": "63ab2aa3-90a2-4e14-b79d-8dc0fb7507f2"
+    }
+  ]
+}

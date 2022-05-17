@@ -1,0 +1,686 @@
+{
+  "name": "cisco-ise",
+  "label": "Cisco ISE",
+  "description": "Cisco ISE connector provides actions like, list all active sessions, quarantine IP/Mac address, unquarantine IP/Mac address etc.",
+  "publisher": "Community",
+  "cs_approved": false,
+  "cs_compatible": true,
+  "version": "2.0.0",
+  "category": "Network Access Control",
+  "icon_small_name": "Cisco_ISE_32X32.png",
+  "icon_large_name": "Cisco_ISE_80X80.png",
+  "help_online": "https://help.cybersponse.com/support/solutions/articles/17000098966-cisco-ise-v2-0-0",
+  "configuration": {
+    "fields": [
+      {
+        "title": "Server URL",
+        "required": true,
+        "editable": true,
+        "visible": true,
+        "type": "text",
+        "name": "ipaddr",
+        "description": "IP address or FQDN of the Cisco ISE server to which you will connect and perform the automated operations."
+      },
+      {
+        "title": "Username",
+        "required": true,
+        "editable": true,
+        "visible": true,
+        "type": "text",
+        "name": "username",
+        "description": "Username to access the Cisco ISE to which you will connect and perform the automated operations."
+      },
+      {
+        "title": "Password",
+        "required": true,
+        "editable": true,
+        "visible": true,
+        "type": "password",
+        "name": "password",
+        "description": "Password to access the Cisco ISE server to which you will connect and perform the automated operations."
+      },
+      {
+        "title": "ERS Port",
+        "name": "port",
+        "required": false,
+        "editable": true,
+        "visible": true,
+        "type": "integer",
+        "tooltip": "Required for ERS API operations",
+        "value": 9060,
+        "description": "External RESTful Services (ERS) is a REST API based on HTTPS over port 9060. This is required to be specified for ERS API operations."
+      },
+      {
+        "title": "Verify SSL",
+        "required": true,
+        "editable": true,
+        "visible": true,
+        "default": true,
+        "type": "checkbox",
+        "name": "verify",
+        "value": true,
+        "description": "Specifies whether the SSL certificate for the server is to be verified or not.By default, this option is set as True."
+      }
+    ]
+  },
+  "operations": [
+    {
+      "operation": "list_active_sessions",
+      "category": "investigation",
+      "annotation": "list_active_sessions",
+      "title": "List All Active Sessions",
+      "description": "Retrieves a list of all active sessions from Cisco ISE.",
+      "enabled": true,
+      "parameters": [],
+      "output_schema": {
+        "request_status": "",
+        "result": {}
+      }
+    },
+    {
+      "operation": "quarantine_ip",
+      "category": "containment",
+      "annotation": "quarantine_ip",
+      "output_schema": {
+        "request_status": "",
+        "result": {}
+      },
+      "title": "EPS: Quarantine IP Address",
+      "description": "Quarantines an IP address that you have specified on Cisco ISE.",
+      "enabled": true,
+      "parameters": [
+        {
+          "title": "Target IP Address",
+          "name": "target_ipaddr",
+          "type": "text",
+          "visible": true,
+          "editable": true,
+          "required": true,
+          "tooltip": "IP Address to quarantine",
+          "description": "IP address of the device to quarantine on Cisco ISE."
+        }
+      ]
+    },
+    {
+      "operation": "quarantine_mac",
+      "category": "containment",
+      "annotation": "quarantine_mac",
+      "output_schema": {
+        "request_status": "",
+        "result": {}
+      },
+      "title": "EPS: Quarantine MAC Address",
+      "description": "Quarantines a MAC address that you have specified on Cisco ISE.",
+      "enabled": true,
+      "parameters": [
+        {
+          "title": "Target MAC Address",
+          "name": "target_mac",
+          "type": "text",
+          "visible": true,
+          "editable": true,
+          "required": true,
+          "tooltip": "MAC Address to quarantine",
+          "description": "MAC address of the device to quarantine on Cisco ISE."
+        }
+      ]
+    },
+    {
+      "operation": "unquarantine_ip",
+      "category": "containment",
+      "annotation": "unquarantine_ip",
+      "output_schema": {
+        "request_status": "",
+        "result": {}
+      },
+      "title": "EPS: Un-Quarantine IP Address",
+      "description": "Removes an IP address that you have specified from the quarantine list on Cisco ISE.",
+      "enabled": true,
+      "parameters": [
+        {
+          "title": "Target IP Address",
+          "name": "target_ipaddr",
+          "type": "text",
+          "visible": true,
+          "editable": true,
+          "required": true,
+          "tooltip": "IP Address to un-quarantine",
+          "description": "IP address of the device to un-quarantine on Cisco ISE."
+        }
+      ]
+    },
+    {
+      "operation": "unquarantine_mac",
+      "category": "containment",
+      "annotation": "unquarantine_mac",
+      "output_schema": {
+        "request_status": "",
+        "result": {}
+      },
+      "title": "EPS: Un-Quarantine MAC Address",
+      "description": "Removes a MAC address that you have specified from the quarantine list on Cisco ISE.",
+      "enabled": true,
+      "parameters": [
+        {
+          "title": "Target MAC Address",
+          "name": "target_mac",
+          "type": "text",
+          "visible": true,
+          "editable": true,
+          "required": true,
+          "tooltip": "MAC Address to un-quarantine",
+          "description": "MAC address of the device to un-quarantine on Cisco ISE."
+        }
+      ]
+    },
+    {
+      "operation": "end_session",
+      "category": "miscellaneous",
+      "annotation": "end_session",
+      "title": "End a Target MAC Address Session",
+      "description": "Ends a session of the MAC address that you have specified on Cisco ISE.",
+      "enabled": true,
+      "parameters": [
+        {
+          "title": "Target MAC Address",
+          "name": "target_mac",
+          "type": "text",
+          "visible": true,
+          "editable": true,
+          "required": true,
+          "tooltip": "MAC Address to end session",
+          "description": "MAC address to end the session on Cisco ISE."
+        }
+      ],
+      "output_schema": {
+        "request_status": "",
+        "result": {}
+      }
+    },
+    {
+      "operation": "log_system_off",
+      "category": "miscellaneous",
+      "annotation": "log_system_off",
+      "output_schema": {
+        "request_status": "",
+        "result": {}
+      },
+      "title": "MAC Address Logout",
+      "description": "Logs off a session of the MAC address that you have specified on Cisco ISE.",
+      "enabled": true,
+      "parameters": [
+        {
+          "title": "Target MAC Address",
+          "name": "target_mac",
+          "type": "text",
+          "visible": true,
+          "editable": true,
+          "required": true,
+          "tooltip": "MAC Address to log out",
+          "description": "MAC address to log out from Cisco ISE."
+        },
+        {
+          "title": "Target Server Address",
+          "name": "target_server",
+          "type": "text",
+          "visible": true,
+          "editable": true,
+          "required": true,
+          "tooltip": "Server to log out target machine",
+          "description": "Server address from which you want to log out the target machine."
+        }
+      ]
+    },
+    {
+      "operation": "get_ise_endpoint",
+      "title": "Get Endpoints",
+      "description": "Retrieves details for all ERS endpoints or a specific endpoint from Cisco ISE based on the endpoint ID or name and other input parameters you have specified.",
+      "annotation": "get_ise_endpoint",
+      "category": "investigation",
+      "enabled": true,
+      "parameters": [
+        {
+          "title": "Get Endpoint By",
+          "name": "get_endpoint_by",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "type": "select",
+          "options": [
+            "Endpoint ID",
+            "Endpoint Name"
+          ],
+          "onchange": {
+            "Endpoint ID": [
+              {
+                "title": "Endpoint ID",
+                "name": "id",
+                "required": true,
+                "visible": true,
+                "editable": true,
+                "type": "text",
+                "description": "ANC endpoint ID based on which you want to retrieve details from Cisco ISE."
+              }
+            ],
+            "Endpoint Name": [
+              {
+                "title": "Endpoint Name",
+                "name": "endpoint_name",
+                "required": true,
+                "visible": true,
+                "editable": true,
+                "type": "text",
+                "description": "ANC endpoint name based on which you want to retrieve details from Cisco ISE."
+              }
+            ]
+          },
+          "description": "Choose the method using which you want to retrieves endpoint details from Cisco ISE. You can choose between Endpoint ID or Endpoint Name.If you choose 'Endpoint ID', then you must specify the following parameter:Endpoint ID: ID of the ANC endpoint whose details you want to retrieve from Cisco ISE.If you choose 'Endpoint Name', then you must specify the following parameter:Endpoint Name: Name of the ANC endpoint whose details you want to retrieve from Cisco ISE."
+        },
+        {
+          "title": "Size",
+          "tooltip": "The number of results to return for on each page",
+          "description": "Number of results that the operation should include per page. The search result is by default paged to 20 results per page.",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "type": "integer",
+          "name": "size"
+        },
+        {
+          "title": "Page",
+          "tooltip": "The page number of results to return",
+          "description": "Page number from which you want to retrieve results. Page numbering starts at page 1.",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "type": "integer",
+          "name": "page"
+        }
+      ],
+      "conditional_output_schema": [
+        {
+          "condition": "{{get_endpoint_by === ''}}",
+          "output_schema": {
+            "SearchResult": {
+              "total": "",
+              "resources": [
+                {
+                  "id": "",
+                  "name": "",
+                  "link": {
+                    "rel": "",
+                    "href": "",
+                    "type": ""
+                  }
+                }
+              ]
+            }
+          }
+        },
+        {
+          "condition": "{{true}}",
+          "output_schema": {
+            "ERSEndPoint": {
+              "id": "",
+              "name": "",
+              "description": "",
+              "mac": "",
+              "profileId": "",
+              "staticProfileAssignment": "",
+              "groupId": "",
+              "staticGroupAssignment": "",
+              "portalUser": "",
+              "identityStore": "",
+              "identityStoreId": "",
+              "link": {
+                "rel": "",
+                "href": "",
+                "type": ""
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "operation": "get_anc_endpoint",
+      "title": "Get ANC Endpoint",
+      "description": "Retrieves details for all Adaptive Network Control (ANC) endpoints or a specific ANC endpoint from Cisco ISE based on the ANC Endpoint ID and other input parameters you have specified.",
+      "annotation": "get_anc_endpoint",
+      "category": "investigation",
+      "enabled": true,
+      "parameters": [
+        {
+          "title": "ANC Endpoint ID",
+          "name": "id",
+          "required": false,
+          "visible": true,
+          "editable": true,
+          "type": "text",
+          "tooltip": "ANC endpoint ID which you want to retrieve details",
+          "description": "ID of the ANC endpoint whose details you want to retrieve from Cisco ISE."
+        },
+        {
+          "title": "Size",
+          "tooltip": "The number of results to return for on each page",
+          "description": "Number of results that the operation should include per page. The search result is by default paged to 20 resources per page.",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "type": "integer",
+          "name": "size"
+        },
+        {
+          "title": "Page",
+          "tooltip": "The page number of results to return",
+          "description": "Page number from which you want to retrieve results. Page numbering starts at page 1.",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "type": "integer",
+          "name": "page"
+        }
+      ],
+      "conditional_output_schema": [
+        {
+          "condition": "{{id === ''}}",
+          "output_schema": {
+            "SearchResult": {
+              "total": "",
+              "resources": [
+                {
+                  "link": {
+                    "type": "",
+                    "rel": "",
+                    "href": ""
+                  },
+                  "id": ""
+                }
+              ]
+            }
+          }
+        },
+        {
+          "condition": "{{true}}",
+          "output_schema": {
+            "ErsAncEndpoint": {
+              "policyName": "",
+              "id": "",
+              "link": {
+                "rel": "",
+                "type": "",
+                "href": ""
+              },
+              "macAddress": ""
+            }
+          }
+        }
+      ]
+    },
+    {
+      "operation": "create_anc_policy",
+      "title": "Create ANC Policy",
+      "description": "Creates and ANC policy in Cisco ISE based on the ANC policy name and action you have specified.",
+      "annotation": "create_policy",
+      "category": "containment",
+      "enabled": true,
+      "parameters": [
+        {
+          "title": "ANC Policy Name",
+          "name": "name",
+          "required": true,
+          "visible": true,
+          "editable": true,
+          "type": "text",
+          "tooltip": "Specify Policy Name which you want to apply on the MAC address or IP Address.",
+          "description": "Name of the policy that you want to create on Cisco ISE."
+        },
+        {
+          "title": "Action",
+          "name": "actions",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "type": "multiselect",
+          "options": [
+            "QUARANTINE",
+            "PORTBOUNCE",
+            "SHUTDOWN"
+          ],
+          "description": "Type of actions to be applied to the ANC policy that you want to create on Cisco ISE. You can choose from the following options: Quarantine, Portbounce, or Shutdown."
+        }
+      ],
+      "output_schema": {
+        "request_status": "",
+        "result": {}
+      }
+    },
+    {
+      "operation": "get_anc_policy",
+      "title": "Get ANC Policy",
+      "description": "Retrieves details for all ANC policies or a specific ANC policy from Cisco ISE based on the policy ID or name and other input parameters you have specified.",
+      "annotation": "get_anc_policy",
+      "category": "investigation",
+      "enabled": true,
+      "parameters": [
+        {
+          "title": "Get Policy By",
+          "name": "get_policy_by",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "type": "select",
+          "options": [
+            "Policy ID",
+            "Policy Name"
+          ],
+          "onchange": {
+            "Policy ID": [
+              {
+                "title": "Policy ID",
+                "name": "id",
+                "required": true,
+                "visible": true,
+                "editable": true,
+                "type": "text",
+                "description": "Policy ID based on which you want to retrieve details from Cisco ISE."
+              }
+            ],
+            "Policy Name": [
+              {
+                "title": "Policy Name",
+                "name": "policy_name",
+                "required": true,
+                "visible": true,
+                "editable": true,
+                "type": "text",
+                "description": "Policy name based on which you want to retrieve details from Cisco ISE."
+              }
+            ]
+          },
+          "description": "Choose the method using which you want to retrieves ANC Policies from Cisco ISE. You can choose between Policy ID or Policy Name.If you choose 'Policy ID', then you must specify the following parameter:Policy ID: ID of the ANC policy whose details you want to retrieve from Cisco ISE.If you choose 'Policy Name', then you must specify the following parameter:Policy Name: Name of the ANC policy whose details you want to retrieve from Cisco ISE."
+        },
+        {
+          "title": "Size",
+          "tooltip": "The number of results to return for on each page",
+          "description": "Number of results that the operation should include per page. The search result is by default paged to 20 resources per page.",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "type": "integer",
+          "name": "size"
+        },
+        {
+          "title": "Page",
+          "tooltip": "The page number of results to return",
+          "description": "Page number from which you want to retrieve results. Page numbering starts at page 1.",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "type": "integer",
+          "name": "page"
+        }
+      ],
+      "conditional_output_schema": [
+        {
+          "condition": "{{get_policy_by === ''}}",
+          "output_schema": {
+            "SearchResult": {
+              "total": "",
+              "resources": [
+                {
+                  "id": "",
+                  "name": "",
+                  "link": {
+                    "rel": "",
+                    "href": "",
+                    "type": ""
+                  }
+                }
+              ]
+            }
+          }
+        },
+        {
+          "condition": "{{true}}",
+          "output_schema": {
+            "ErsAncPolicy": {
+              "id": "",
+              "name": "",
+              "actions": [],
+              "link": {
+                "rel": "",
+                "href": "",
+                "type": ""
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "operation": "assign_policy",
+      "title": "Assign ANC Policy",
+      "description": "Assigns a specific ANC policy to a MAC address or an IP address on Cisco ISE based on the policy or name and the MAC or IP address you have specified.",
+      "annotation": "assign_policy",
+      "category": "containment",
+      "enabled": true,
+      "parameters": [
+        {
+          "title": "ANC Policy Name",
+          "name": "policyName",
+          "required": true,
+          "visible": true,
+          "editable": true,
+          "type": "text",
+          "tooltip": "Specify Policy Name which you want to apply on the MAC address or IP Address.",
+          "description": "Name of the ANC policy that you want to apply to a specific MAC or IP address on Cisco ISE."
+        },
+        {
+          "title": "Apply To",
+          "name": "apply_to",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "type": "select",
+          "options": [
+            "MAC Address",
+            "IP Address"
+          ],
+          "onchange": {
+            "MAC Address": [
+              {
+                "title": "MAC Address",
+                "name": "macAddress",
+                "required": true,
+                "visible": true,
+                "editable": true,
+                "type": "text",
+                "tooltip": "MAC Address on which you want to apply policy",
+                "description": "Specify MAC Address on which you want to apply policy."
+              }
+            ],
+            "IP Address": [
+              {
+                "title": "IP Address",
+                "name": "ipAddress",
+                "required": true,
+                "visible": true,
+                "editable": true,
+                "type": "text",
+                "tooltip": "IP Address on which you want to apply policy",
+                "description": "Specify IP Address on which you want to apply policy."
+              }
+            ]
+          },
+          "description": "Choose whether you want to apply the specific ANC policy to a Mac Address or an IP address.If you choose 'IP Address', then you must specify the following parameter:IP Address: IP Address on which you want to apply the specified policy.If you choose 'MAC Address', then you must specify the following parameter:MAC Address: MAC Address on which you want to apply the specified policy."
+        }
+      ],
+      "output_schema": {
+        "request_status": "",
+        "result": {}
+      }
+    },
+    {
+      "operation": "revoke_policy",
+      "title": "Revoke ANC Policy",
+      "description": "Revokes a specific ANC policy from a MAC address or an IP address on Cisco ISE based on the policy or name and the MAC or IP address you have specified.",
+      "annotation": "revoke_policy",
+      "category": "remediation",
+      "enabled": true,
+      "parameters": [
+        {
+          "title": "ANC Policy Name",
+          "name": "policyName",
+          "required": true,
+          "visible": true,
+          "editable": true,
+          "type": "text",
+          "tooltip": "Specify Policy Name which you want to revoke from the MAC address or IP Address.",
+          "description": "Name of the ANC policy that you want to revoke from a specific MAC or IP address on Cisco ISE."
+        },
+        {
+          "title": "Revoke From",
+          "name": "revoke_from",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "type": "select",
+          "options": [
+            "MAC Address",
+            "IP Address"
+          ],
+          "onchange": {
+            "MAC Address": [
+              {
+                "title": "MAC Address",
+                "name": "macAddress",
+                "required": true,
+                "visible": true,
+                "editable": true,
+                "type": "text",
+                "description": "Specify MAC Address which you want to revoke policy."
+              }
+            ],
+            "IP Address": [
+              {
+                "title": "IP Address",
+                "name": "ipAddress",
+                "required": true,
+                "visible": true,
+                "editable": true,
+                "type": "text",
+                "description": "Specify IP Address which you want to revoke policy."
+              }
+            ]
+          },
+          "description": "Choose whether you want to revoke the specific ANC policy from a Mac Address or an IP address.If you choose 'IP Address', then you must specify the following parameter:IP Address: IP Address from which you want to revoke the specified policy.If you choose 'MAC Address', then you must specify the following parameter:MAC Address: MAC Address from which you want to revoke the specified policy."
+        }
+      ],
+      "output_schema": {
+        "request_status": "",
+        "result": {}
+      }
+    }
+  ]
+}
