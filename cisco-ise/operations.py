@@ -1,11 +1,14 @@
 """ Copyright start
-  Copyright (C) 2008 - 2020 Fortinet Inc.
+  Copyright (C) 2008 - 2022 Fortinet Inc.
   All rights reserved.
   FORTINET CONFIDENTIAL & FORTINET PROPRIETARY SOURCE CODE
   Copyright end """
-import requests, xmltodict
-from connectors.core.connector import get_logger, ConnectorError
 
+import requests, xmltodict, logging
+from connectors.core.connector import get_logger, ConnectorError
+from requests_toolbelt.utils import dump
+
+MAX_SIZE = 100
 logger = get_logger('cisco-ise')
 
 
@@ -59,8 +62,10 @@ def make_rest_call(endpoint, config, headers={}, params={}, payload={}, method='
     else:
         url = "{0}{1}".format(ipaddr, endpoint)
     auth = (username, password)
+
     try:
         r = requests.request(method, url, auth=auth, params=params, headers=headers, json=payload, verify=verify_ssl)
+        logger.warning('REQUESTS_DUMP:\n{}'.format(dump.dump_all(r).decode('utf-8')))
     except Exception as e:
         raise ConnectorError(e)
     response = check_response(r)
@@ -145,7 +150,7 @@ def log_system_off(config, params):
         raise ConnectorError(error_message)
 
 
-def list_active_sessions(config, params={}):
+def list_active_sessions(config, params):
     try:
         url = "/admin/API/mnt/Session/ActiveList"
         request_result = make_rest_call(url, config)
@@ -156,11 +161,13 @@ def list_active_sessions(config, params={}):
         raise ConnectorError(error_message)
 
 
-def list_internal_users(config, params={}):
+def list_internal_users(config, params):
     try:
-        url = "/ers/config/internaluser"
-        params = {'size': 1}
-        request_result = make_rest_call(url, config, params=params, ers_call=True)
+        endpoint = "/ers/config/internaluser"
+        query_params = build_query_params({'size': params.get('size'), 'page': params.get('page')})
+        if len(params) > 0:
+            query_params.update(build_query_filters(params))
+        request_result = make_rest_call(endpoint, config, params=query_params, ers_call=True)
         return request_result
     except Exception as e:
         error_message = "Error getting internal user. Error message as follows:\n{}".format(str(e))
@@ -168,9 +175,112 @@ def list_internal_users(config, params={}):
         raise ConnectorError(error_message)
 
 
+def get_user_attributes(config,params):
+    try:
+        user_details = list_internal_users(config, params)
+        if user_details["SearchResult"]["total"] != 1:
+            logger.exception("User not found")
+            raise ConnectorError("User not found")
+        return user_details["SearchResult"]["resources"][0]
+    except Exception as e:
+        error_message = "Error getting internal user. Error message as follows:\n{}".format(str(e))
+        logger.exception(error_message)
+        raise ConnectorError(error_message)        
+
+
+def _set_internal_user_status(config, params, user_enabled):        
+    try:
+        url = "/ers/config/internaluser/{}"
+        req_payload = {
+        "InternalUser": {
+            "id": "",
+            "name": "",
+            "enabled": True
+            }
+        }
+
+        user_details = get_user_attributes(config, params)
+        req_payload["InternalUser"]["id"] = user_details["id"]
+        req_payload["InternalUser"]["name"] = user_details["name"]
+        req_payload["InternalUser"]["enabled"] = user_enabled
+        url = url.format(user_details["id"])
+        return make_rest_call(url, config, payload=req_payload, method='PUT', ers_call=True)
+ 
+    except Exception as e:
+        error_message = "Error setting internal user status. Error message as follows:\n{}".format(str(e))
+        logger.exception(error_message)
+        raise ConnectorError(error_message)        
+
+
+def enable_internal_user(config, params):
+    return _set_internal_user_status(config, params, True)
+
+
+def disable_internal_user(config, params):
+    return _set_internal_user_status(config, params, False)
+
+
+def get_internal_user_details(config, params):
+    try:
+        endpoint = "/ers/config/internaluser/{}".format(params.get('userid'))
+        return make_rest_call(endpoint, config, ers_call=True)
+    except Exception as e:
+        error_message = "Error getting internal user. Error message as follows:\n{}".format(str(e))
+        logger.exception(error_message)
+        raise ConnectorError(error_message)
+
+
+def list_guest_users(config, params):
+    try:
+        endpoint = "/ers/config/guestuser"
+        query_params = build_query_params({'size': params.get('size'), 'page': params.get('page')})
+        if len(params) > 0:
+            query_params.update(build_query_filters(params))
+        request_result = make_rest_call(endpoint, config, params=query_params, ers_call=True)
+        return request_result
+    except Exception as e:
+        error_message = "Error getting guest user. Error message as follows:\n{}".format(str(e))
+        logger.exception(error_message)
+        raise ConnectorError(error_message)
+
+
+def get_guest_user_details(config, params):
+    try:
+        endpoint = "/ers/config/guestuser/{}".format(params.get('userid'))
+        return make_rest_call(endpoint, config, ers_call=True)
+    except Exception as e:
+        error_message = "Error getting guest user. Error message as follows:\n{}".format(str(e))
+        logger.exception(error_message)
+        raise ConnectorError(error_message)
+
+
+def suspend_guest_user(config, params):
+    try:
+        endpoint = "/ers/config/guestuser/suspend/{}"
+        user_details = get_user_attributes(config,params)
+        endpoint = endpoint.format(user_details["id"])
+        return make_rest_call(endpoint, config, method='PUT', ers_call=True)
+    except Exception as e:
+        error_message = "Error suspending guest user. Error message as follows:\n{}".format(str(e))
+        logger.exception(error_message)
+        raise ConnectorError(error_message)
+
+
+def reinstate_guest_user(config, params):
+    try:
+        endpoint = "/ers/config/guestuser/reinstate/{}"
+        user_details = get_user_attributes(config,params)
+        endpoint = endpoint.format(user_details["id"])
+        return make_rest_call(endpoint, config, method='PUT', ers_call=True)
+    except Exception as e:
+        error_message = "Error reinstating guest user. Error message as follows:\n{}".format(str(e))
+        logger.exception(error_message)
+        raise ConnectorError(error_message)
+
+
 def check_health(config):
     try:
-        result = list_internal_users(config)
+        result = list_active_sessions(config, {})
         if result: return True
     except Exception as e:
         logger.exception(e)
@@ -198,6 +308,18 @@ def build_query_params(params):
         if value:
             query_params[key] = value
     return query_params
+
+
+def build_query_filters(params):
+    query_filters = "first_"
+    filter_exists = False
+    for key, value in params.items():
+        if "filter." in key and value:
+            query_filters = query_filters + "&filter=" +key.split(".")[1]+ ".EQ." + value
+            filter_exists = True
+    if filter_exists:
+        return {"filter":query_filters.replace("first_&filter=","")}
+    return {}
 
 
 def get_ise_endpoint(config, params):
@@ -329,5 +451,15 @@ operations = {
     'create_anc_policy': create_anc_policy,
     'get_anc_policy': get_anc_policy,
     'assign_policy': assign_policy,
-    'revoke_policy': revoke_policy
+    'revoke_policy': revoke_policy,
+    'list_internal_users': list_internal_users,
+    'disable_internal_user': disable_internal_user,
+    'enable_internal_user': enable_internal_user,
+    'get_internal_user_details': get_internal_user_details,
+    'list_guest_users': list_guest_users,
+    'get_guest_user_details': get_guest_user_details,
+    'suspend_guest_user': suspend_guest_user,
+    'reinstate_guest_user': reinstate_guest_user
 }
+
+
