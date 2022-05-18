@@ -340,13 +340,61 @@
           "editable": true
         }
       ],
-      "output_schema": ""
+      "output_schema": {
+        "SearchResult": {
+          "total": "",
+          "resources": [
+            {
+              "id": "",
+              "name": "",
+              "description": "",
+              "link": {
+                "rel": "",
+                "href": "",
+                "type": ""
+              }
+            }
+          ]
+        }
+      }
     },
     {
       "operation": "get_guest_user_details",
       "category": "investigation",
       "annotation": "get_guest_user_details",
-      "output_schema": "",
+      "output_schema": {
+        "GuestUser": {
+          "id": "",
+          "name": "",
+          "description": "",
+          "guestType": "",
+          "sponsorUserName": "",
+          "guestInfo": {
+            "userName": "",
+            "emailAddress": "",
+            "phoneNumber": "",
+            "password": "",
+            "enabled": "",
+            "smsServiceProvider": ""
+          },
+          "guestAccessInfo": {
+            "validDays": "",
+            "fromDate": "",
+            "toDate": "",
+            "location": ""
+          },
+          "portalId": "",
+          "customFields": {
+            "another key": "",
+            "some key": ""
+          },
+          "link": {
+            "rel": "",
+            "href": "",
+            "type": ""
+          }
+        }
+      },
       "title": "Get Guest User Details",
       "description": "Get Guest User Details",
       "enabled": true,
@@ -1006,6 +1054,4 @@
       }
     }
   ]
-}
-]
 }
