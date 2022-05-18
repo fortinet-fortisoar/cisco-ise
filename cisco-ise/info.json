@@ -1,65 +1,63 @@
 {
   "name": "cisco-ise",
+  "version": "2.1.0",
   "label": "Cisco ISE",
-  "description": "Cisco ISE connector provides actions like, list all active sessions, quarantine IP/Mac address, unquarantine IP/Mac address etc.",
+  "description": "Cisco ISE connector provides actions like, list all active sessions, quarantine IP/Mac address, un-quarantine IP/Mac address etc.",
   "publisher": "Community",
-  "cs_approved": false,
-  "cs_compatible": true,
-  "version": "2.0.0",
   "category": "Network Access Control",
   "icon_small_name": "Cisco_ISE_32X32.png",
   "icon_large_name": "Cisco_ISE_80X80.png",
-  "help_online": "https://help.cybersponse.com/support/solutions/articles/17000098966-cisco-ise-v2-0-0",
+  "cs_approved": false,
+  "cs_compatible": true,
+  "help_online": "",
   "configuration": {
     "fields": [
       {
         "title": "Server URL",
-        "required": true,
-        "editable": true,
-        "visible": true,
+        "description": "IP address or FQDN of the Cisco ISE server to which you will connect and perform the automated operations.",
         "type": "text",
         "name": "ipaddr",
-        "description": "IP address or FQDN of the Cisco ISE server to which you will connect and perform the automated operations."
+        "required": true,
+        "visible": true,
+        "editable": true
       },
       {
         "title": "Username",
-        "required": true,
-        "editable": true,
-        "visible": true,
+        "description": "Username to access the Cisco ISE to which you will connect and perform the automated operations.",
         "type": "text",
         "name": "username",
-        "description": "Username to access the Cisco ISE to which you will connect and perform the automated operations."
+        "required": true,
+        "visible": true,
+        "editable": true
       },
       {
         "title": "Password",
-        "required": true,
-        "editable": true,
-        "visible": true,
+        "description": "Password to access the Cisco ISE server to which you will connect and perform the automated operations.",
         "type": "password",
         "name": "password",
-        "description": "Password to access the Cisco ISE server to which you will connect and perform the automated operations."
+        "required": true,
+        "visible": true,
+        "editable": true
       },
       {
         "title": "ERS Port",
+        "description": "External RESTful Services (ERS) is a REST API based on HTTPS over port 9060. This is required to be specified for ERS API operations.",
+        "type": "integer",
         "name": "port",
         "required": false,
-        "editable": true,
         "visible": true,
-        "type": "integer",
-        "tooltip": "Required for ERS API operations",
-        "value": 9060,
-        "description": "External RESTful Services (ERS) is a REST API based on HTTPS over port 9060. This is required to be specified for ERS API operations."
+        "editable": true,
+        "value": 9060
       },
       {
         "title": "Verify SSL",
-        "required": true,
-        "editable": true,
-        "visible": true,
-        "default": true,
+        "description": "Specifies whether the SSL certificate for the server is to be verified or not.\nBy default, this option is set as True.",
         "type": "checkbox",
         "name": "verify",
-        "value": true,
-        "description": "Specifies whether the SSL certificate for the server is to be verified or not.By default, this option is set as True."
+        "required": false,
+        "visible": true,
+        "editable": true,
+        "value": true
       }
     ]
   },
@@ -73,9 +71,382 @@
       "enabled": true,
       "parameters": [],
       "output_schema": {
-        "request_status": "",
-        "result": {}
+        "result": {
+          "activeList": {
+            "@noOfActiveSession": ""
+          }
+        },
+        "request_status": ""
       }
+    },
+    {
+      "operation": "get_internal_user_details",
+      "category": "investigation",
+      "annotation": "get_internal_user_details",
+      "output_schema": {
+        "InternalUser": {
+          "id": "",
+          "link": {
+            "rel": "",
+            "href": "",
+            "type": ""
+          },
+          "name": "",
+          "enabled": "",
+          "lastName": "",
+          "password": "",
+          "firstName": "",
+          "changePassword": "",
+          "identityGroups": "",
+          "passwordIDStore": "",
+          "customAttributes": {
+            "Static-IPv4-Addr": ""
+          },
+          "expiryDateEnabled": ""
+        }
+      },
+      "title": "Get Internal User Details",
+      "description": "Get Internal User Details",
+      "enabled": true,
+      "parameters": [
+        {
+          "title": "User ID",
+          "type": "text",
+          "name": "userid",
+          "required": true,
+          "visible": true,
+          "editable": true,
+          "tooltip": "User ID can be found via List Internal Users action"
+        }
+      ]
+    },
+    {
+      "operation": "list_internal_users",
+      "title": "List Internal Users",
+      "description": "Get all the internal users.",
+      "annotation": "list_internal_users",
+      "category": "investigation",
+      "enabled": true,
+      "parameters": [
+        {
+          "title": "User Name",
+          "type": "text",
+          "name": "filter.name",
+          "required": false,
+          "visible": true,
+          "editable": true
+        },
+        {
+          "title": "First Name",
+          "type": "text",
+          "name": "filter.firstName",
+          "required": false,
+          "visible": true,
+          "editable": true
+        },
+        {
+          "title": "Last Name",
+          "type": "text",
+          "name": "filter.lastName",
+          "required": false,
+          "visible": true,
+          "editable": true
+        },
+        {
+          "title": "Email Address",
+          "type": "text",
+          "name": "filter.email",
+          "required": false,
+          "visible": true,
+          "editable": true
+        },
+        {
+          "title": "Size",
+          "type": "integer",
+          "name": "size",
+          "required": false,
+          "visible": true,
+          "editable": true
+        },
+        {
+          "title": "Page",
+          "type": "integer",
+          "name": "page",
+          "required": false,
+          "visible": true,
+          "editable": true
+        }
+      ],
+      "output_schema": {
+        "SearchResult": {
+          "total": "",
+          "nextPage": {
+            "rel": "",
+            "href": "",
+            "type": ""
+          },
+          "resources": [
+            {
+              "id": "",
+              "link": {
+                "rel": "",
+                "href": "",
+                "type": ""
+              },
+              "name": ""
+            }
+          ]
+        }
+      }
+    },
+    {
+      "operation": "disable_internal_user",
+      "category": "containment",
+      "annotation": "disable_internal_user",
+      "output_schema": {
+        "UpdatedFieldsList": {
+          "updatedField": [
+            {
+              "field": "",
+              "newValue": "",
+              "oldValue": ""
+            }
+          ]
+        }
+      },
+      "title": "Disable Internal User",
+      "description": "Sets Internal User Status to: Disabled",
+      "enabled": true,
+      "parameters": [
+        {
+          "title": "Username",
+          "type": "text",
+          "name": "filter.name",
+          "required": true,
+          "visible": true,
+          "editable": true
+        }
+      ]
+    },
+    {
+      "operation": "enable_internal_user",
+      "category": "containment",
+      "annotation": "enable_internal_user",
+      "output_schema": {
+        "UpdatedFieldsList": {
+          "updatedField": [
+            {
+              "field": "",
+              "newValue": "",
+              "oldValue": ""
+            }
+          ]
+        }
+      },
+      "title": "Enable Internal User",
+      "description": "Sets Internal User Status to: Enabled",
+      "enabled": true,
+      "parameters": [
+        {
+          "title": "Username",
+          "type": "text",
+          "name": "filter.name",
+          "required": true,
+          "visible": true,
+          "editable": true
+        }
+      ]
+    },
+    {
+      "operation": "list_guest_users",
+      "title": "List Guest Users",
+      "description": "Get all the Guest Users.",
+      "annotation": "list_guest_users",
+      "category": "investigation",
+      "enabled": true,
+      "parameters": [
+        {
+          "title": "User Name",
+          "type": "text",
+          "name": "filter.name",
+          "required": false,
+          "visible": true,
+          "editable": true
+        },
+        {
+          "title": "First Name",
+          "type": "text",
+          "name": "filter.firstName",
+          "required": false,
+          "visible": true,
+          "editable": true
+        },
+        {
+          "title": "Last Name",
+          "type": "text",
+          "name": "filter.lastName",
+          "required": false,
+          "visible": true,
+          "editable": true
+        },
+        {
+          "title": "Email Address",
+          "type": "text",
+          "name": "filter.emailAddress",
+          "required": false,
+          "visible": true,
+          "editable": true
+        },
+        {
+          "title": "Sponsor Username",
+          "type": "text",
+          "name": "filter.sponsorUserName",
+          "required": false,
+          "visible": true,
+          "editable": true,
+          "tooltip": "Username for the sponsor of the guest account"
+        },
+        {
+          "title": "Company",
+          "type": "text",
+          "name": "filter.company",
+          "required": false,
+          "visible": true,
+          "editable": true
+        },
+        {
+          "title": "Phone Number",
+          "type": "text",
+          "name": "filter.phoneNumber",
+          "required": false,
+          "visible": true,
+          "editable": true,
+          "tooltip": "Phone number should be E.164 format, exp: +13211239034"
+        },
+        {
+          "title": "Size",
+          "type": "integer",
+          "name": "size",
+          "required": false,
+          "visible": true,
+          "editable": true
+        },
+        {
+          "title": "Page",
+          "type": "integer",
+          "name": "page",
+          "required": false,
+          "visible": true,
+          "editable": true
+        }
+      ],
+      "output_schema": {
+        "SearchResult": {
+          "total": "",
+          "resources": [
+            {
+              "id": "",
+              "name": "",
+              "description": "",
+              "link": {
+                "rel": "",
+                "href": "",
+                "type": ""
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "operation": "get_guest_user_details",
+      "category": "investigation",
+      "annotation": "get_guest_user_details",
+      "output_schema": {
+        "GuestUser": {
+          "id": "",
+          "name": "",
+          "description": "",
+          "guestType": "",
+          "sponsorUserName": "",
+          "guestInfo": {
+            "userName": "",
+            "emailAddress": "",
+            "phoneNumber": "",
+            "password": "",
+            "enabled": "",
+            "smsServiceProvider": ""
+          },
+          "guestAccessInfo": {
+            "validDays": "",
+            "fromDate": "",
+            "toDate": "",
+            "location": ""
+          },
+          "portalId": "",
+          "customFields": {
+            "another key": "",
+            "some key": ""
+          },
+          "link": {
+            "rel": "",
+            "href": "",
+            "type": ""
+          }
+        }
+      },
+      "title": "Get Guest User Details",
+      "description": "Get Guest User Details",
+      "enabled": true,
+      "parameters": [
+        {
+          "title": "User ID",
+          "type": "text",
+          "name": "userid",
+          "required": true,
+          "visible": true,
+          "editable": true,
+          "tooltip": "User ID can be found via List Guest Users action"
+        }
+      ]
+    },
+    {
+      "operation": "suspend_guest_user",
+      "category": "containment",
+      "annotation": "suspend_guest_user",
+      "output_schema": "",
+      "title": "Suspend Guest User",
+      "description": "Suspend Guest User",
+      "enabled": true,
+      "parameters": [
+        {
+          "title": "Guest Username",
+          "type": "text",
+          "name": "filter.name",
+          "required": true,
+          "visible": true,
+          "editable": true
+        }
+      ]
+    },
+    {
+      "operation": "reinstate_guest_user",
+      "category": "containment",
+      "annotation": "reinstate_guest_user",
+      "output_schema": "",
+      "title": "Reinstate Guest User",
+      "description": "Reinstate Guest User",
+      "enabled": true,
+      "parameters": [
+        {
+          "title": "Guest Username",
+          "type": "text",
+          "name": "filter.name",
+          "required": true,
+          "visible": true,
+          "editable": true
+        }
+      ]
     },
     {
       "operation": "quarantine_ip",
