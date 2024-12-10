@@ -3,7 +3,7 @@
   "data": [
     {
       "@type": "WorkflowCollection",
-      "name": "Sample - Cisco ISE - 2.1.0",
+      "name": "Sample - Cisco ISE - 2.1.1",
       "description": "Sample playbooks for \"Cisco ISE\" connector. If you are planning to use any of the sample playbooks in your environment, ensure that you clone those playbooks and move them to a different collection, since the sample playbook collection gets deleted during connector upgrade and delete.",
       "visible": true,
       "image": "/api/3/images/eec46e41-ab24-449e-a14d-b25dba256723",
@@ -68,7 +68,7 @@
                 "name": "Cisco ISE",
                 "config": "6c8f7378-7ea7-49bf-8569-302593a6c7d0",
                 "params": [],
-                "version": "2.1.0",
+                "version": "2.1.1",
                 "connector": "cisco-ise",
                 "operation": "list_guest_users",
                 "operationTitle": "List Guest Users",
@@ -165,7 +165,7 @@
                   "macAddress": "C8:B3:01:C9:DC:0B",
                   "policyName": "CyOPs_Policy"
                 },
-                "version": "2.1.0",
+                "version": "2.1.1",
                 "connector": "cisco-ise",
                 "operation": "assign_policy",
                 "operationTitle": "Assign ANC Policy",
@@ -259,7 +259,7 @@
                 "name": "Cisco ISE",
                 "config": "6c8f7378-7ea7-49bf-8569-302593a6c7d0",
                 "params": [],
-                "version": "2.1.0",
+                "version": "2.1.1",
                 "connector": "cisco-ise",
                 "operation": "list_internal_users",
                 "operationTitle": "List Internal Users",
@@ -354,7 +354,7 @@
                 "params": {
                   "filter.name": "adminj023"
                 },
-                "version": "2.1.0",
+                "version": "2.1.1",
                 "connector": "cisco-ise",
                 "operation": "disable_internal_user",
                 "operationTitle": "Disable Internal User",
@@ -449,7 +449,7 @@
                 "params": {
                   "target_mac": "C8:B3:01:C9:DC:0B"
                 },
-                "version": "2.1.0",
+                "version": "2.1.1",
                 "connector": "cisco-ise",
                 "operation": "unquarantine_mac",
                 "operationTitle": "EPS: Un-Quarantine MAC Address",
@@ -545,7 +545,7 @@
                 "params": {
                   "target_ipaddr": "1.1.1.1"
                 },
-                "version": "2.1.0",
+                "version": "2.1.1",
                 "connector": "cisco-ise",
                 "operation": "unquarantine_ip",
                 "operationTitle": "EPS: Un-Quarantine IP Address",
@@ -643,7 +643,7 @@
                   "size": "",
                   "get_policy_by": ""
                 },
-                "version": "2.1.0",
+                "version": "2.1.1",
                 "connector": "cisco-ise",
                 "operation": "get_anc_policy",
                 "operationTitle": "Get ANC Policy",
@@ -741,7 +741,7 @@
                   "page": "",
                   "size": ""
                 },
-                "version": "2.1.0",
+                "version": "2.1.1",
                 "connector": "cisco-ise",
                 "operation": "get_anc_endpoint",
                 "operationTitle": "Get ANC Endpoint",
@@ -837,7 +837,7 @@
                 "params": {
                   "target_mac": "C8:B3:01:C9:DC:0B"
                 },
-                "version": "2.1.0",
+                "version": "2.1.1",
                 "connector": "cisco-ise",
                 "operation": "end_session",
                 "operationTitle": "End a Target MAC Address Session",
@@ -933,7 +933,7 @@
                 "params": {
                   "target_mac": "C8:B3:01:C9:DC:0B"
                 },
-                "version": "2.1.0",
+                "version": "2.1.1",
                 "connector": "cisco-ise",
                 "operation": "quarantine_mac",
                 "operationTitle": "EPS: Quarantine MAC Address",
@@ -1029,7 +1029,7 @@
                 "params": {
                   "userid": "0a2d3496-1c8b-4614-a44e-e28d02bff724"
                 },
-                "version": "2.1.0",
+                "version": "2.1.1",
                 "connector": "cisco-ise",
                 "operation": "get_guest_user_details",
                 "operationTitle": "Get Guest User Details",
@@ -1128,7 +1128,7 @@
                   "endpoint_name": "",
                   "get_endpoint_by": ""
                 },
-                "version": "2.1.0",
+                "version": "2.1.1",
                 "connector": "cisco-ise",
                 "operation": "get_ise_endpoint",
                 "operationTitle": "Get Endpoints",
@@ -1224,7 +1224,7 @@
                 "params": {
                   "target_ipaddr": "1.1.1.1"
                 },
-                "version": "2.1.0",
+                "version": "2.1.1",
                 "connector": "cisco-ise",
                 "operation": "quarantine_ip",
                 "operationTitle": "EPS: Quarantine IP Address",
@@ -1320,7 +1320,7 @@
                 "params": {
                   "filter.name": "adminj23"
                 },
-                "version": "2.1.0",
+                "version": "2.1.1",
                 "connector": "cisco-ise",
                 "operation": "enable_internal_user",
                 "operationTitle": "Enable Internal User",
@@ -1418,7 +1418,7 @@
                     "QUARANTINE"
                   ]
                 },
-                "version": "2.1.0",
+                "version": "2.1.1",
                 "connector": "cisco-ise",
                 "operation": "create_anc_policy",
                 "operationTitle": "Create ANC Policy",
@@ -1514,7 +1514,7 @@
                 "params": {
                   "userid": "0a2d3496-1c8b-4614-a44e-e28d02bff724"
                 },
-                "version": "2.1.0",
+                "version": "2.1.1",
                 "connector": "cisco-ise",
                 "operation": "get_internal_user_details",
                 "operationTitle": "Get Internal User Details",
@@ -1609,7 +1609,7 @@
                 "params": {
                   "filter.name": "adminjs"
                 },
-                "version": "2.1.0",
+                "version": "2.1.1",
                 "connector": "cisco-ise",
                 "operation": "suspend_guest_user",
                 "operationTitle": "Suspend Guest User",
@@ -1706,7 +1706,7 @@
                   "policyName": "CyOPs_Policy",
                   "revoke_from": "MAC Address"
                 },
-                "version": "2.1.0",
+                "version": "2.1.1",
                 "connector": "cisco-ise",
                 "operation": "revoke_policy",
                 "operationTitle": "Revoke ANC Policy",
@@ -1802,7 +1802,7 @@
                 "params": {
                   "filter.name": "demo"
                 },
-                "version": "2.1.0",
+                "version": "2.1.1",
                 "connector": "cisco-ise",
                 "operation": "reinstate_guest_user",
                 "operationTitle": "Reinstate Guest User",
@@ -1898,7 +1898,7 @@
                   "target_mac": "C8:B3:01:C9:DC:0B",
                   "target_server": "1.1.1.1"
                 },
-                "version": "2.1.0",
+                "version": "2.1.1",
                 "connector": "cisco-ise",
                 "operation": "log_system_off",
                 "operationTitle": "MAC Address Logout",
@@ -1992,7 +1992,7 @@
                 "name": "Cisco ISE",
                 "config": "6c8f7378-7ea7-49bf-8569-302593a6c7d0",
                 "params": [],
-                "version": "2.1.0",
+                "version": "2.1.1",
                 "connector": "cisco-ise",
                 "operation": "list_active_sessions",
                 "operationTitle": "List All Active Sessions",
