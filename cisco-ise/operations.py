@@ -153,7 +153,8 @@ def log_system_off(config, params):
 def list_active_sessions(config, params):
     try:
         url = "/admin/API/mnt/Session/ActiveList"
-        request_result = make_rest_call(url, config)
+        headers = {"Accept": "application/xml"}
+        request_result = make_rest_call(url, config, headers=headers)
         return {"request_status": "success", "result": request_result}
     except Exception as e:
         error_message = "Error getting active sessions list. Error message as follows:\n{}".format(str(e))

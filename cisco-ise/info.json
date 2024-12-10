@@ -1,6 +1,6 @@
 {
   "name": "cisco-ise",
-  "version": "2.1.0",
+  "version": "2.1.1",
   "label": "Cisco ISE",
   "description": "Cisco ISE connector provides actions like, list all active sessions, quarantine IP/Mac address, un-quarantine IP/Mac address etc.",
   "publisher": "Community",
@@ -9,7 +9,7 @@
   "icon_large_name": "Cisco_ISE_80X80.png",
   "cs_approved": false,
   "cs_compatible": true,
-  "help_online": "https://docs.fortinet.com/document/fortisoar/2.1.0/cisco-ise/281/cisco-ise-v2-1-0",
+  "help_online": "",
   "configuration": {
     "fields": [
       {
